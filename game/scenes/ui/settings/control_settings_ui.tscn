@@ -10,25 +10,22 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 follow_focus = true
 script = ExtResource("3")
 
 [node name="ControlSettingsCategoryContainer" type="VBoxContainer" parent="."]
-offset_right = 1152.0
-offset_bottom = 648.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="MouseSettingsUI" parent="ControlSettingsCategoryContainer" instance=ExtResource("1")]
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_right = 1152.0
-offset_bottom = 92.0
+layout_mode = 2
 
 [node name="ActionBindingCategoriesContainer" type="VBoxContainer" parent="ControlSettingsCategoryContainer"]
-offset_top = 96.0
-offset_right = 1152.0
-offset_bottom = 96.0
+layout_mode = 2
+size_flags_vertical = 3
 
 [node name="InputRemapDialog" parent="ControlSettingsCategoryContainer" instance=ExtResource("4")]
 visible = false
