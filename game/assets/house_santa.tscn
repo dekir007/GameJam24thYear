@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://cmaase2r7gd2n"]
+
+[ext_resource type="PackedScene" uid="uid://cqj7b2dj67h60" path="res://assets/house santa.glb" id="1_52gne"]
+[ext_resource type="Texture2D" uid="uid://we7bc7is4c2k" path="res://assets/gametexture.png" id="1_y4l1u"]
+[ext_resource type="Texture2D" uid="uid://c0xob482vgfb8" path="res://assets/noise.png" id="2_kbe32"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fvrsu"]
+albedo_texture = ExtResource("1_y4l1u")
+detail_enabled = true
+detail_blend_mode = 3
+detail_uv_layer = 1
+detail_albedo = ExtResource("2_kbe32")
+uv2_scale = Vector3(0.25, 0.25, 0.25)
+uv2_triplanar = true
+
+[node name="house santa" instance=ExtResource("1_52gne")]
+
+[node name="Cube_002" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_fvrsu")

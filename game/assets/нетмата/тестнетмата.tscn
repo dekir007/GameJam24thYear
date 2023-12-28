@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbxpj7ioxauqp"]
+
+[ext_resource type="PackedScene" uid="uid://54qft87l6j7y" path="res://assets/нетмата/тестнетмата.glb" id="1_ku8ab"]
+
+[node name="тестнетмата" instance=ExtResource("1_ku8ab")]

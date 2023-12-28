@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dyy464pdqxfva"]
+
+[ext_resource type="PackedScene" uid="uid://d0b6ncjjimagx" path="res://assets/elka.glb" id="1_ledab"]
+[ext_resource type="Material" uid="uid://caodu41lukg7y" path="res://ready/main.tres" id="2_wd7pr"]
+
+[node name="elka" instance=ExtResource("1_ledab")]
+
+[node name="Cylinder" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_wd7pr")

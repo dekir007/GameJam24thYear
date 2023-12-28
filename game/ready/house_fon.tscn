@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://1xhl55t0we0h"]
+
+[ext_resource type="PackedScene" uid="uid://dxl2t07qboq3y" path="res://assets/house-fon.glb" id="1_8r6a5"]
+[ext_resource type="Material" uid="uid://caodu41lukg7y" path="res://ready/main.tres" id="2_x1jwh"]
+
+[node name="house-fon" instance=ExtResource("1_8r6a5")]
+
+[node name="Cube_006" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0220747, 4.55221, 0.353557)
+surface_material_override/0 = ExtResource("2_x1jwh")

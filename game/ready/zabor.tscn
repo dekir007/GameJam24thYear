@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://w4ff73vo73g3"]
+
+[ext_resource type="PackedScene" uid="uid://ggjmtw0dmrsg" path="res://assets/zabor.glb" id="1_8rf7f"]
+[ext_resource type="Material" uid="uid://caodu41lukg7y" path="res://ready/main.tres" id="2_0ijn4"]
+
+[node name="zabor" instance=ExtResource("1_8rf7f")]
+
+[node name="Cube_009" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+surface_material_override/0 = ExtResource("2_0ijn4")
