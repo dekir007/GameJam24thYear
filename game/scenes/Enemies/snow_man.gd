@@ -39,12 +39,13 @@ func dash():
 		await get_tree().create_timer(1.7).timeout
 		can_dash = true
 
-func get_hit():
-	health_component.apply_damage(2)
+func grab_gift():
+	pass
 
 func _on_health_component_died() -> void:
 	death_spawner_component.spawn(global_position, get_parent())
 	queue_free()
 
-func _on_health_component_health_changed(upd: HealthUpdate) -> void:
-	damage_label_spawner_component.spawn(over_head.global_position, get_parent(), {"amount" : -(upd.cur_hp-upd.prev_hp)})
+func _on_hit_box_component_hit(hit_context: HitBoxComponent.HitContext) -> void:
+	health_component.apply_damage(hit_context.damage)
+	damage_label_spawner_component.spawn(over_head.global_position, get_parent(), {"amount" : hit_context.damage})

@@ -58,7 +58,12 @@ func _physics_process(delta: float) -> void:
 
 func handle_anim():
 	if velocity.length_squared() > 0:
-		animation_player.play("walk")
+		var dot = get_global_transform().basis.z.dot(velocity)
+		print(dot)
+		if get_global_transform().basis.z.dot(velocity) > 0:
+			animation_player.play_backwards("walk")
+		else:
+			animation_player.play("walk")
 	else:
 		animation_player.play("idle")
 
@@ -87,4 +92,3 @@ func look_at_cursor():
 
 func shoot():
 	spawner_component.spawn(marker_3d.global_position, self)
-	print("111")
