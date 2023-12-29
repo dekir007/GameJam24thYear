@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://orqq154lnhqm"]
+
+[ext_resource type="Script" path="res://scenes/death_particles.gd" id="1_f1plf"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wt4mq"]
+direction = Vector3(0, 0, 0)
+spread = 180.0
+flatness = 1.0
+initial_velocity_min = 5.0
+initial_velocity_max = 10.0
+gravity = Vector3(0, -3, 0)
+scale_min = 0.7
+scale_max = 1.2
+
+[sub_resource type="SphereMesh" id="SphereMesh_xnfn0"]
+
+[node name="DeathParticles" type="GPUParticles3D"]
+emitting = false
+amount = 3
+lifetime = 2.0
+one_shot = true
+explosiveness = 0.91
+process_material = SubResource("ParticleProcessMaterial_wt4mq")
+draw_pass_1 = SubResource("SphereMesh_xnfn0")
+script = ExtResource("1_f1plf")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

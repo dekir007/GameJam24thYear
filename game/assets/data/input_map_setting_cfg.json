@@ -4,7 +4,7 @@
 	"bindings_column_names": ["Primary", "Secondary", "Game Pad"],
 	"bindings_column_types": ["key|mouse", "key|mouse", "pad"],
 	"mouse_settings": {
-		"show": false,
+		"show": true,
 		"default_invert_y": false,
 		"sensitivity": {
 			"min": 0.5,

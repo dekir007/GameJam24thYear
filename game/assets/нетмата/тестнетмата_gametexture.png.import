@@ -2,22 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://n2ypu2qsvp2s"
-path.s3tc="res://.godot/imported/test_gametexture.png-29ee2e955c6b04bae679e3cef82e9a4e.s3tc.ctex"
+uid="uid://crnie0hbtrr60"
+path="res://.godot/imported/тестнетмата_gametexture.png-43dad902946f751b5c3da575f5e9f151.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 generator_parameters={}
 
 [deps]
 
-source_file="res://test/test_gametexture.png"
-dest_files=["res://.godot/imported/test_gametexture.png-29ee2e955c6b04bae679e3cef82e9a4e.s3tc.ctex"]
+source_file="res://assets/нетмата/тестнетмата_gametexture.png"
+dest_files=["res://.godot/imported/тестнетмата_gametexture.png-43dad902946f751b5c3da575f5e9f151.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
@@ -33,4 +32,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1

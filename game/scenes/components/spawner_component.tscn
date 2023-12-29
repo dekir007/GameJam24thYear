@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bgehfpwlaunvl"]
+
+[ext_resource type="Script" path="res://scenes/components/spawner_component.gd" id="1_kmmdt"]
+
+[node name="SpawnerComponent" type="Node3D"]
+script = ExtResource("1_kmmdt")

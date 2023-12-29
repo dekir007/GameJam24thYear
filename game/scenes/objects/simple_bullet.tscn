@@ -1,0 +1,72 @@
+[gd_scene load_steps=9 format=3 uid="uid://c87821oeg37ns"]
+
+[ext_resource type="Script" path="res://scenes/objects/simple_bullet.gd" id="1_loeon"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_cweuf"]
+lightmap_size_hint = Vector2i(11, 6)
+radius = 0.3
+height = 0.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r7obg"]
+albedo_color = Color(0.74902, 0.203922, 0.0784314, 1)
+emission_enabled = true
+emission = Color(0.870588, 0.337255, 0.0862745, 1)
+emission_energy_multiplier = 3.35
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1cw7c"]
+albedo_color = Color(0.917647, 0.262745, 0, 1)
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_h823k"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_whk0g"]
+emission_shape_scale = Vector3(0.5, 0.5, 0.5)
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 25.0
+initial_velocity_max = 35.0
+directional_velocity_min = 1.0
+directional_velocity_max = 1.0
+directional_velocity_curve = SubResource("CurveXYZTexture_h823k")
+gravity = Vector3(0, -20, 0)
+scale_min = 0.5
+scale_max = 1.5
+
+[sub_resource type="SphereMesh" id="SphereMesh_tjieu"]
+radius = 0.1
+height = 0.2
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_wt3bd"]
+radius = 0.305048
+
+[node name="SimpleBullet" type="Node3D"]
+top_level = true
+script = ExtResource("1_loeon")
+speed = 75.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_cweuf")
+surface_material_override/0 = SubResource("StandardMaterial3D_r7obg")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 15.0
+autostart = true
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+material_override = SubResource("StandardMaterial3D_1cw7c")
+emitting = false
+amount = 12
+lifetime = 1.5
+one_shot = true
+explosiveness = 1.0
+randomness = 0.26
+process_material = SubResource("ParticleProcessMaterial_whk0g")
+draw_pass_1 = SubResource("SphereMesh_tjieu")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_wt3bd")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="finished" from="GPUParticles3D" to="." method="_on_gpu_particles_3d_finished"]
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

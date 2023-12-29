@@ -1,0 +1,68 @@
+[gd_scene load_steps=9 format=3 uid="uid://d4beuuagle5ei"]
+
+[ext_resource type="Script" path="res://scenes/Enemies/snow_man.gd" id="1_bs3mb"]
+[ext_resource type="PackedScene" uid="uid://bgehfpwlaunvl" path="res://scenes/components/spawner_component.tscn" id="2_eh7bk"]
+[ext_resource type="PackedScene" uid="uid://orqq154lnhqm" path="res://scenes/death_particles.tscn" id="3_p2jkp"]
+[ext_resource type="PackedScene" uid="uid://c34cc3hoyt8sc" path="res://scenes/floating_text_3d.tscn" id="4_hcixu"]
+[ext_resource type="PackedScene" uid="uid://d3recwm5ur062" path="res://scenes/components/health_component.tscn" id="4_ta14i"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_tcg48"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j8avl"]
+albedo_color = Color(0.219608, 0.219608, 0.219608, 1)
+emission_enabled = true
+emission_energy_multiplier = 16.0
+emission_operator = 1
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uph77"]
+
+[node name="SnowMan" type="CharacterBody3D"]
+script = ExtResource("1_bs3mb")
+
+[node name="Body" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="Bottom" type="MeshInstance3D" parent="Body"]
+mesh = SubResource("SphereMesh_tcg48")
+skeleton = NodePath("../..")
+
+[node name="Middle" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0.72423, 0)
+mesh = SubResource("SphereMesh_tcg48")
+skeleton = NodePath("../..")
+
+[node name="Head" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.21429, 0)
+mesh = SubResource("SphereMesh_tcg48")
+skeleton = NodePath("../..")
+
+[node name="RightEye" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.209641, 1.32633, 0.0812237)
+material_override = SubResource("StandardMaterial3D_j8avl")
+mesh = SubResource("SphereMesh_tcg48")
+skeleton = NodePath("../..")
+
+[node name="LeftEye" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.209641, 1.32633, -0.120979)
+material_override = SubResource("StandardMaterial3D_j8avl")
+mesh = SubResource("SphereMesh_tcg48")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.471435, 0)
+shape = SubResource("CapsuleShape3D_uph77")
+
+[node name="DeathSpawnerComponent" parent="." instance=ExtResource("2_eh7bk")]
+scene = ExtResource("3_p2jkp")
+
+[node name="DamageLabelSpawnerComponent" parent="." instance=ExtResource("2_eh7bk")]
+scene = ExtResource("4_hcixu")
+
+[node name="HealthComponent" parent="." instance=ExtResource("4_ta14i")]
+max_health = 10
+
+[node name="OverHead" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.69634, 0)
+
+[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
+[connection signal="health_changed" from="HealthComponent" to="." method="_on_health_component_health_changed"]
