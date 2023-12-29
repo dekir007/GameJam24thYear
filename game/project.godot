@@ -21,16 +21,26 @@ InputMapMgr="*res://utils/input_map/input_map_mgr.gd"
 VolumeSettingsMgr="*res://utils/volume_settings_mgr.gd"
 TransitionMgr="*res://utils/transition_mgr.tscn"
 ScreenshotMgr="*res://utils/screenshot_mgr.tscn"
+Globals="*res://scripts/Globals.gd"
 
 [debug]
 
 gdscript/warnings/unused_class_variable=true
 
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+
 [file_customization]
 
 folder_colors={
 "res://assets/": "red",
-"res://scenes/": "yellow"
+"res://scenes/": "yellow",
+"res://scripts/": "purple",
+"res://sounds/": "green"
 }
 
 [global]

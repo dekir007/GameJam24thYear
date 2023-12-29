@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://yyi4nmski8oe"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_crd25"]
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 15.0
+initial_velocity_max = 25.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.7
+scale_max = 1.4
+turbulence_enabled = true
+turbulence_noise_strength = 1.9
+turbulence_noise_speed = Vector3(1, 0, 1)
+turbulence_noise_speed_random = 1.95
+turbulence_influence_max = 0.156
+
+[sub_resource type="SphereMesh" id="SphereMesh_dvc8k"]
+radius = 0.07
+height = 0.14
+
+[node name="Blizzard" type="GPUParticles3D"]
+amount = 256
+lifetime = 5.0
+visibility_aabb = AABB(-3.18703, -2.64204, -3.15613, 6.37407, 5.28409, 6.31226)
+process_material = SubResource("ParticleProcessMaterial_crd25")
+draw_pass_1 = SubResource("SphereMesh_dvc8k")

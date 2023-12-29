@@ -254,7 +254,7 @@ transform = Transform3D(0.978667, 0, 0.205453, 0, 1, 0, -0.205453, 0, 0.978667, 
 transform = Transform3D(0.978667, 0, 0.205453, 0, 1, 0, -0.205453, 0, 0.978667, -1.46414, 0.00188184, -34.8756)
 
 [node name="snow24" parent="Environment/snows" instance=ExtResource("7_ma2cr")]
-transform = Transform3D(0.978667, 0, 0.205453, 0, 1, 0, -0.205453, 0, 0.978667, -16.1746, 0.00188184, -30.118)
+transform = Transform3D(0.978667, 0, 0.205453, 0, 1, 0, -0.205453, 0, 0.978667, -16.3201, 0.00188184, -27.7942)
 
 [node name="snow23" parent="Environment/snows" instance=ExtResource("7_ma2cr")]
 transform = Transform3D(0.978667, 0, 0.205453, 0, 1, 0, -0.205453, 0, 0.978667, 0.452442, 0.00188136, -38.6933)
@@ -415,5 +415,13 @@ scene = ExtResource("13_hwb8b")
 [node name="Timer" type="Timer" parent="."]
 wait_time = 7.0
 autostart = true
+
+[node name="EscapePoints" type="Node3D" parent="."]
+
+[node name="Escape1" type="Marker3D" parent="EscapePoints" groups=["escape_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.4624, 0.722618, -15.2412)
+
+[node name="Escape2" type="Marker3D" parent="EscapePoints" groups=["escape_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.3886, 0.722618, -11.8841)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

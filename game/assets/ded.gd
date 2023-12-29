@@ -19,7 +19,7 @@ var init_dist : Vector3
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	init_dist = Vector3(0,5,5)
+	init_dist = Vector3(0,17.2,7.2)
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -59,7 +59,6 @@ func _physics_process(delta: float) -> void:
 func handle_anim():
 	if velocity.length_squared() > 0:
 		var dot = get_global_transform().basis.z.dot(velocity)
-		print(dot)
 		if get_global_transform().basis.z.dot(velocity) > 0:
 			animation_player.play_backwards("walk")
 		else:

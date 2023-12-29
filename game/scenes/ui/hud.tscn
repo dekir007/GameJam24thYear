@@ -1,10 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://b7wir6v0viwtk"]
+[gd_scene load_steps=5 format=3 uid="uid://b7wir6v0viwtk"]
 
 [ext_resource type="PackedScene" uid="uid://de3h10lhcnk3r" path="res://scenes/ui/pause_dialog.tscn" id="1"]
+[ext_resource type="Script" path="res://scenes/ui/hud.gd" id="1_gv0mc"]
 [ext_resource type="PackedScene" uid="uid://1iaqbf7npwiv" path="res://scenes/ui/game_over_dialog.tscn" id="2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_lhbou"]
+font_size = 24
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
 
 [node name="Hud" type="CanvasLayer"]
 process_mode = 3
+script = ExtResource("1_gv0mc")
 
 [node name="Dialogs" type="Control" parent="."]
 layout_mode = 3
@@ -22,3 +29,10 @@ layout_mode = 1
 [node name="GameOverDialog" parent="Dialogs" instance=ExtResource("2")]
 visible = false
 layout_mode = 1
+
+[node name="Label" type="Label" parent="."]
+offset_left = 14.0
+offset_top = 12.0
+offset_right = 202.0
+offset_bottom = 55.0
+label_settings = SubResource("LabelSettings_lhbou")
