@@ -90,5 +90,8 @@ emitting = false
 [node name="GiftSpawnerComponent" parent="." instance=ExtResource("2_eh7bk")]
 scene = ExtResource("8_t8n57")
 
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+avoidance_enabled = true
+
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
 [connection signal="hit" from="HitBoxComponent" to="." method="_on_hit_box_component_hit"]

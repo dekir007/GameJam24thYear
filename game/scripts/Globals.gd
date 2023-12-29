@@ -9,5 +9,4 @@ func game_over():
 	var gameover_event = InputEventAction.new()
 	gameover_event.action = "game_over"
 	gameover_event.pressed = true
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	Input.parse_input_event(gameover_event)

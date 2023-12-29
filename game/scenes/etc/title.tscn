@@ -1,9 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://dmp1uu2qvevev"]
+[gd_scene load_steps=7 format=3 uid="uid://dmp1uu2qvevev"]
 
 [ext_resource type="PackedScene" uid="uid://b20uyj2a7snys" path="res://scenes/etc/scene_background.tscn" id="1"]
 [ext_resource type="Script" path="res://scenes/etc/title.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://bswc06g8au3yg" path="res://scenes/components/transition_button/transition_button.tscn" id="4"]
+[ext_resource type="FontFile" path="res://assets/fonts/title.tres" id="4_3xgrr"]
 [ext_resource type="Theme" uid="uid://cg33m0umsdbg0" path="res://assets/themes/global.tres" id="5"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_cc3u6"]
+font = ExtResource("4_3xgrr")
+font_size = 128
+outline_size = 32
+outline_color = Color(0, 0, 0, 1)
 
 [node name="Title" type="Control"]
 self_modulate = Color(0.34902, 0.160784, 0.619608, 1)
@@ -31,7 +38,8 @@ theme_override_constants/margin_top = 40
 [node name="TitleLbl" type="Label" parent="TitleMarginContainer"]
 layout_mode = 2
 theme_type_variation = &"TitleLabel"
-text = "Game Title"
+text = "Snowmen attack!"
+label_settings = SubResource("LabelSettings_cc3u6")
 
 [node name="ButtonsMarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -40,10 +48,13 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -311.0
-offset_top = -328.0
+offset_left = -772.0
+offset_top = -714.0
 grow_horizontal = 0
 grow_vertical = 0
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 75
+theme_override_constants/margin_bottom = 75
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ButtonsMarginContainer"]
 layout_mode = 2
@@ -51,22 +62,26 @@ alignment = 2
 
 [node name="NewGameBtn" parent="ButtonsMarginContainer/VBoxContainer" instance=ExtResource("4")]
 layout_mode = 2
+theme_override_font_sizes/font_size = 128
 text = "New Game"
 scene_to_load = "res://scenes/etc/how_to_play.tscn"
 grab_focus_on_start = true
 
 [node name="SettingsBtn" parent="ButtonsMarginContainer/VBoxContainer" instance=ExtResource("4")]
 layout_mode = 2
+theme_override_font_sizes/font_size = 128
 text = "Settings"
 scene_to_load = "res://scenes/etc/settings.tscn"
 
 [node name="CreditsBtn" parent="ButtonsMarginContainer/VBoxContainer" instance=ExtResource("4")]
 layout_mode = 2
+theme_override_font_sizes/font_size = 128
 text = "Credits"
 scene_to_load = "res://scenes/etc/credits.tscn"
 
 [node name="ExitBtn" type="Button" parent="ButtonsMarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 128
 text = "Exit"
 flat = true
 

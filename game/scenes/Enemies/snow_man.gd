@@ -9,6 +9,7 @@ extends CharacterBody3D
 @onready var over_head: Marker3D = $OverHead
 @onready var gift_pos: Marker3D = $GiftPos
 @onready var gift_spawner_component:  = $GiftSpawnerComponent as SpawnerComponent
+@onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
 
 var can_dash = true
 var dashing = false
@@ -23,7 +24,10 @@ func _physics_process(delta: float) -> void:
 		if target == null:
 			target = get_tree().get_first_node_in_group("player")
 	var target_global_position = target.global_position
-	var dir = global_position.direction_to(target_global_position)
+	
+	nav_agent.target_position = target_global_position
+	
+	var dir = global_position.direction_to(nav_agent.get_next_path_position())
 	#velocity = dir * speed * delta
 	var vel = dir * speed * delta
 	
