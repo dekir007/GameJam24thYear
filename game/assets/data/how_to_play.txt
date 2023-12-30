@@ -5,4 +5,5 @@ Left Mouse Click - shoot
 Esc - menu
 
 Goal:
-Snowmen attack and steal gifts for little children! Shoot 'em and save gifts!
+Snowmen attack and steal gifts prepared for little children! 
+Shoot 'em and save gifts!

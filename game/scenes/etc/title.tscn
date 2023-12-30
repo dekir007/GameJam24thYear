@@ -85,4 +85,5 @@ theme_override_font_sizes/font_size = 128
 text = "Exit"
 flat = true
 
+[connection signal="button_down" from="ButtonsMarginContainer/VBoxContainer/NewGameBtn" to="." method="_on_new_game_btn_button_down"]
 [connection signal="pressed" from="ButtonsMarginContainer/VBoxContainer/ExitBtn" to="." method="_on_ExitBtn_pressed"]

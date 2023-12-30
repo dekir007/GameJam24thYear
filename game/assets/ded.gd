@@ -9,6 +9,7 @@ const JUMP_VELOCITY = 4.5
 @onready var camera_rig: Node3D = $CameraRig
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var marker_3d: Marker3D = $Marker3D
+@onready var shoot_sound: AudioStreamPlayer = $ShootSound
 
 @onready var spawner_component:  = $SpawnerComponent as SpawnerComponent
 
@@ -91,3 +92,4 @@ func look_at_cursor():
 
 func shoot():
 	spawner_component.spawn(marker_3d.global_position, self)
+	shoot_sound.play()

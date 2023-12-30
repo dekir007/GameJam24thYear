@@ -14,3 +14,7 @@ func _input(event):
 		visible = true
 		get_tree().paused = true
 		_retry_btn.grab_focus()
+
+
+func _on_retry_btn_button_down() -> void:
+	Globals.reset()

@@ -1,7 +1,8 @@
-[gd_scene load_steps=25 format=3 uid="uid://bbfn02d86am50"]
+[gd_scene load_steps=22 format=3 uid="uid://bbfn02d86am50"]
 
 [ext_resource type="Texture2D" uid="uid://c0xob482vgfb8" path="res://assets/noise.png" id="1_haccv"]
 [ext_resource type="Script" path="res://scenes/levels/arena.gd" id="1_u3e63"]
+[ext_resource type="Environment" uid="uid://28fk7jkcf017" path="res://scenes/levels/arena.tres" id="2_jki3c"]
 [ext_resource type="PackedScene" uid="uid://bg8631sd3swlm" path="res://assets/ded.tscn" id="4_2rjso"]
 [ext_resource type="PackedScene" uid="uid://b21bj1qicc13t" path="res://ready/house_1.tscn" id="4_hb4m2"]
 [ext_resource type="PackedScene" uid="uid://bfdjy824dap48" path="res://ready/house_2.tscn" id="5_acsjm"]
@@ -13,46 +14,11 @@
 [ext_resource type="PackedScene" uid="uid://1xhl55t0we0h" path="res://ready/house_fon.tscn" id="11_ctjyx"]
 [ext_resource type="PackedScene" uid="uid://bgehfpwlaunvl" path="res://scenes/components/spawner_component.tscn" id="12_jtnkr"]
 [ext_resource type="PackedScene" uid="uid://d4beuuagle5ei" path="res://scenes/Enemies/snow_man.tscn" id="13_hwb8b"]
-
-[sub_resource type="Gradient" id="Gradient_e3t31"]
-offsets = PackedFloat32Array(0.221557, 0.564336, 1)
-colors = PackedColorArray(0, 0, 0, 1, 0.515729, 0.405334, 0.38805, 1, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_x1ute"]
-gradient = SubResource("Gradient_e3t31")
-fill_from = Vector2(0.0940171, 0.42735)
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3artt"]
-sky_top_color = Color(0.156863, 0.4, 0.741176, 1)
-sky_horizon_color = Color(0.47451, 0.682353, 0.807843, 1)
-ground_bottom_color = Color(0.129412, 0.0980392, 0.0196078, 1)
-ground_horizon_color = Color(0.533333, 0.67451, 0.517647, 1)
-
-[sub_resource type="Sky" id="Sky_wa1lg"]
-sky_material = SubResource("ProceduralSkyMaterial_3artt")
-
-[sub_resource type="Environment" id="Environment_1fet7"]
-background_mode = 2
-background_energy_multiplier = 1.5
-sky = SubResource("Sky_wa1lg")
-ambient_light_color = Color(0.568627, 0.333333, 0.215686, 1)
-ambient_light_sky_contribution = 0.75
-ambient_light_energy = 1.5
-tonemap_mode = 3
-tonemap_exposure = 0.95
-ssao_enabled = true
-volumetric_fog_density = 0.1
-volumetric_fog_albedo = Color(0.917647, 1, 0.827451, 1)
-volumetric_fog_emission = Color(0.32549, 0.32549, 0.32549, 1)
-volumetric_fog_emission_energy = 1.5
-adjustment_enabled = true
-adjustment_brightness = 0.95
-adjustment_contrast = 0.85
-adjustment_saturation = 1.25
-adjustment_color_correction = SubResource("GradientTexture2D_x1ute")
+[ext_resource type="AudioStream" uid="uid://c3cti7hhkrebw" path="res://assets/sounds/game song.mp3" id="15_2aa2e"]
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_jjoyp"]
-dof_blur_far_distance = 50.0
+dof_blur_far_enabled = true
+dof_blur_far_distance = 28.17
 dof_blur_far_transition = 25.0
 dof_blur_amount = 0.55
 
@@ -80,7 +46,7 @@ data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0
 script = ExtResource("1_u3e63")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_1fet7")
+environment = ExtResource("2_jki3c")
 camera_attributes = SubResource("CameraAttributesPractical_jjoyp")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
@@ -443,5 +409,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.6428, 0.722618, -10.6403)
 
 [node name="Marker3D3" type="Marker3D" parent="SnowmenSpawnerPoints"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.9653, 0.722618, -10.6403)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_2aa2e")
+volume_db = -8.0
+autoplay = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

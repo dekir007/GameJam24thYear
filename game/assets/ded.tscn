@@ -1,10 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://bg8631sd3swlm"]
+[gd_scene load_steps=20 format=3 uid="uid://bg8631sd3swlm"]
 
 [ext_resource type="Script" path="res://assets/ded.gd" id="1_q4un2"]
 [ext_resource type="Material" uid="uid://dl3oe85t8dho0" path="res://assets/ded.tres" id="2_cj3ts"]
 [ext_resource type="PackedScene" uid="uid://b7wir6v0viwtk" path="res://scenes/ui/hud.tscn" id="3_cdqsf"]
 [ext_resource type="PackedScene" uid="uid://bgehfpwlaunvl" path="res://scenes/components/spawner_component.tscn" id="4_1w46f"]
 [ext_resource type="PackedScene" uid="uid://c87821oeg37ns" path="res://scenes/objects/simple_bullet.tscn" id="5_xcanw"]
+[ext_resource type="AudioStream" uid="uid://u4kwbcm6ery2" path="res://assets/sounds/Gun Paintball Shot 8 - QuickSounds.com.mp3" id="6_dl6l2"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fawkt"]
 
@@ -1194,3 +1195,12 @@ scene = ExtResource("5_xcanw")
 
 [node name="Marker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.18236, 3.07959, -4.9411)
+
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="."]
+radius = 0.5
+height = 2.0
+
+[node name="ShootSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_dl6l2")
+volume_db = -8.0
+pitch_scale = 3.0

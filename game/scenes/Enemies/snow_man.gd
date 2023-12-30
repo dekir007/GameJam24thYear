@@ -8,8 +8,10 @@ extends CharacterBody3D
 @onready var health_component:  = $HealthComponent as HealthComponent
 @onready var over_head: Marker3D = $OverHead
 @onready var gift_pos: Marker3D = $GiftPos
-@onready var gift_spawner_component:  = $GiftSpawnerComponent as SpawnerComponent
+@onready var gift_spawner_component: = $GiftSpawnerComponent as SpawnerComponent
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
+@onready var audio_grabbed: AudioStreamPlayer = $AudioGrabbed
+@onready var audio_put: AudioStreamPlayer = $AudioPut
 
 var can_dash = true
 var dashing = false
@@ -30,22 +32,17 @@ func _physics_process(delta: float) -> void:
 	var dir = global_position.direction_to(nav_agent.get_next_path_position())
 	#velocity = dir * speed * delta
 	var vel = dir * speed * delta
+	nav_agent.set_velocity(vel)
 	
-	velocity = lerp(velocity, vel, delta*10)
 	#velocity = velocity.move_toward(vel, vel.length_squared()/30)
 	var dist = global_position.distance_to(target_global_position) 
 	#print(self, dist)
 	if dist > 5 and dist < 6:
 		dash()
 	elif dist < 2:
-		if target != null:
-			if !has_gift() and target.is_in_group("gift"):
-				grab_gift()
-			elif target.is_in_group("escape_points"):
-				put_gift()
+		pass
 	
 	look_at(target_global_position)
-	move_and_slide()
 
 func dash():
 	if can_dash:
@@ -64,11 +61,13 @@ func grab_gift():
 	gift.scale /= 3
 	
 	target = get_tree().get_nodes_in_group("escape_points").pick_random()
+	audio_grabbed.play()
 
 func put_gift():
 	var gift = gift_pos.get_child(0)
 	gift.queue_free()
 	target = get_tree().get_nodes_in_group("gift").reduce(func(accum : Node3D, node : Node3D): return node if node.global_position.distance_to(global_position) < accum.global_position.distance_to(global_position) else accum)
+	audio_put.play()
 	Globals.stolen_gift_count -= 1
 	Globals.gift_count -= 1
 	if Globals.gift_count == 0:
@@ -83,8 +82,23 @@ func _on_health_component_died() -> void:
 	if has_gift(): # + Vector3.UP * 5
 		gift_spawner_component.spawn(global_position , get_tree().current_scene)
 		Globals.stolen_gift_count -= 1
+		#Globals.gift_count += 1
 	queue_free()
 
 func _on_hit_box_component_hit(hit_context: HitBoxComponent.HitContext) -> void:
 	health_component.apply_damage(hit_context.damage)
 	damage_label_spawner_component.spawn(over_head.global_position, get_parent(), {"amount" : hit_context.damage})
+
+func _on_navigation_agent_3d_velocity_computed(safe_velocity: Vector3) -> void:
+	var vel_max = Vector3(30,30,30) # снеговики могут улететь в стратосферу, когда сверху перса
+	velocity = clamp(lerp(velocity, safe_velocity, get_process_delta_time() * 10), -vel_max, vel_max)
+	move_and_slide()
+
+
+func _on_navigation_agent_3d_target_reached() -> void:
+	print("reached")
+	if target != null:
+		if !has_gift() and target.is_in_group("gift"):
+			grab_gift()
+		elif target.is_in_group("escape_points"):
+			put_gift()

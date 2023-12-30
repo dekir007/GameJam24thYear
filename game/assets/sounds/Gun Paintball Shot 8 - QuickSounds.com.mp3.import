@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://u4kwbcm6ery2"
+path="res://.godot/imported/Gun Paintball Shot 8 - QuickSounds.com.mp3-9e58c9263411965a1afdfa38a2d18350.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/Gun Paintball Shot 8 - QuickSounds.com.mp3"
+dest_files=["res://.godot/imported/Gun Paintball Shot 8 - QuickSounds.com.mp3-9e58c9263411965a1afdfa38a2d18350.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
