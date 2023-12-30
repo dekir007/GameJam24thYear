@@ -57,6 +57,5 @@ scene_to_load = "res://scenes/etc/title.tscn"
 process_mode = 2
 stream = ExtResource("5_gdd8h")
 volume_db = -5.0
-autoplay = true
 
 [connection signal="button_down" from="VBoxContainer/RetryBtn" to="." method="_on_retry_btn_button_down"]

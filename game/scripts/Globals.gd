@@ -6,7 +6,7 @@ var stolen_gift_count : int = 0
 var score : int = 0
 
 var menu_theme_sound = preload("res://assets/sounds/Snowland Loop.wav")
-var menu_theme_player
+var menu_theme_player : AudioStreamPlayer
 
 func _ready() -> void:
 	menu_theme_player = AudioStreamPlayer.new()
@@ -14,7 +14,8 @@ func _ready() -> void:
 	add_child(menu_theme_player)
 
 func start_playing():
-	menu_theme_player.play()
+	if !menu_theme_player.playing:
+		menu_theme_player.play()
 	
 func stop_playing():
 	menu_theme_player.stop()
