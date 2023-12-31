@@ -12,6 +12,9 @@ extends CharacterBody3D
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var audio_grabbed: AudioStreamPlayer = $AudioGrabbed
 @onready var audio_put: AudioStreamPlayer = $AudioPut
+@onready var progress_bar:  = $OverHead/ProgressBar as ProgressBar3D
+
+const ICICLE = preload("res://scenes/objects/icicle.tscn")
 
 var can_dash = true
 var dashing = false
@@ -83,6 +86,19 @@ func _on_health_component_died() -> void:
 		gift_spawner_component.spawn(global_position , get_tree().current_scene)
 		Globals.stolen_gift_count -= 1
 		#Globals.gift_count += 1
+	# TODO
+	var num = randi_range(5, 12)
+	for i in range(num):
+		var a = PI * i * (2. / num)
+		var dir = Vector3.FORWARD.rotated(Vector3.UP, a)
+		var icicle = ICICLE.instantiate()
+		icicle.dir = dir #global_position.direction_to(get_tree().get_first_node_in_group("player").global_position)
+		icicle.speed = 10
+		get_parent().add_child(icicle)
+		icicle.global_position = global_position
+		print("icicle")
+	
+	
 	queue_free()
 
 func _on_hit_box_component_hit(hit_context: HitBoxComponent.HitContext) -> void:
@@ -102,3 +118,7 @@ func _on_navigation_agent_3d_target_reached() -> void:
 			grab_gift()
 		elif target.is_in_group("escape_points"):
 			put_gift()
+
+
+func _on_health_component_health_changed(upd: HealthUpdate) -> void:
+	progress_bar.value = float(upd.cur_hp) / upd.max_hp 

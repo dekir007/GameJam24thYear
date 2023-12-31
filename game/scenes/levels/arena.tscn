@@ -17,7 +17,6 @@
 [ext_resource type="AudioStream" uid="uid://c3cti7hhkrebw" path="res://assets/sounds/game song.mp3" id="15_2aa2e"]
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_jjoyp"]
-dof_blur_far_enabled = true
 dof_blur_far_distance = 28.17
 dof_blur_far_transition = 25.0
 dof_blur_amount = 0.55
@@ -61,7 +60,7 @@ transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -12.7565, 0.0326236,
 scene = ExtResource("13_hwb8b")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 7.0
+wait_time = 5.0
 autostart = true
 
 [node name="EscapePoints" type="Node3D" parent="."]
@@ -388,7 +387,7 @@ transform = Transform3D(0.368238, 0, -0.929731, 0, 1, 0, 0.929731, 0, 0.368238, 
 transform = Transform3D(0.978075, 0, -0.208253, 0, 1, 0, 0.208253, 0, 0.978075, -11.6419, -0.00224966, -36.0408)
 
 [node name="gift5" parent="gifts" instance=ExtResource("9_co6rd")]
-transform = Transform3D(0.184209, 0, 0.982887, 0, 1, 0, -0.982887, 0, 0.184209, -6.05856, -0.0022487, -32.4082)
+transform = Transform3D(0.184209, 0, 0.982887, 0, 1, 0, -0.982887, 0, 0.184209, -6.05856, -0.0022487, -32.3946)
 
 [node name="gift6" parent="gifts" instance=ExtResource("9_co6rd")]
 transform = Transform3D(0.998969, 0, 0.0453979, 0, 1, 0, -0.0453979, 0, 0.998969, -5.45651, -0.0022487, -34.5633)

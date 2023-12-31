@@ -15,7 +15,7 @@ func _process(delta: float) -> void:
 func _on_timer_timeout() -> void:
 	queue_free()
 
-func _on_area_3d_area_entered(area: Area3D) -> void:
+func _on_area_3d_area_entered(_area: Area3D) -> void:
 	gpu_particles_3d.emitting=true
 	speed = 0
 	mesh.hide()
@@ -23,7 +23,7 @@ func _on_area_3d_area_entered(area: Area3D) -> void:
 	get_tree().create_timer(gpu_particles_3d.lifetime).timeout.connect(queue_free)
 
 
-func _on_area_3d_body_entered(body: Node3D) -> void:
+func _on_area_3d_body_entered(_body: Node3D) -> void:
 	gpu_particles_3d.emitting=true
 	speed = 0
 	mesh.hide()

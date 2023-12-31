@@ -10,9 +10,14 @@ const JUMP_VELOCITY = 4.5
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var marker_3d: Marker3D = $Marker3D
 @onready var shoot_sound: AudioStreamPlayer = $ShootSound
+@onready var shoot_timer: Timer = $ShootTimer
+@onready var hud: CanvasLayer = $Hud
 
 @onready var spawner_component:  = $SpawnerComponent as SpawnerComponent
+@onready var health_component: = $HealthComponent as HealthComponent
 
+
+var can_shoot : bool = true
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -48,7 +53,7 @@ func _physics_process(delta: float) -> void:
 		velocity *= 1.5
 #endregion
 	
-	if Input.is_action_just_pressed("click"):
+	if Input.is_action_pressed("click"):
 		shoot()
 	
 	camera_follows_player()
@@ -91,5 +96,22 @@ func look_at_cursor():
 		look_at(cursor_pos, Vector3.UP)
 
 func shoot():
+	if !can_shoot:
+		return
+	can_shoot = false
 	spawner_component.spawn(marker_3d.global_position, self)
 	shoot_sound.play()
+	shoot_timer.start()
+
+func _on_shoot_timer_timeout() -> void:
+	can_shoot = true
+
+func _on_hit_box_component_hit(hit_context: RefCounted) -> void:
+	health_component.apply_damage(10)
+	print("ded hit")
+
+func _on_health_component_health_changed(upd: HealthUpdate) -> void:
+	hud.texture_progress_bar.value = float(upd.cur_hp)/upd.max_hp * 100
+
+func _on_health_component_died() -> void:
+	Globals.game_over()

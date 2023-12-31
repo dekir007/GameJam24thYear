@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://b7wir6v0viwtk"]
+[gd_scene load_steps=7 format=3 uid="uid://b7wir6v0viwtk"]
 
 [ext_resource type="PackedScene" uid="uid://de3h10lhcnk3r" path="res://scenes/ui/pause_dialog.tscn" id="1"]
 [ext_resource type="Script" path="res://scenes/ui/hud.gd" id="1_gv0mc"]
 [ext_resource type="PackedScene" uid="uid://1iaqbf7npwiv" path="res://scenes/ui/game_over_dialog.tscn" id="2"]
+[ext_resource type="Texture2D" uid="uid://bmheldm5wuh4f" path="res://assets/images/progress bar/loadingEmpty.png" id="4_j8otk"]
+[ext_resource type="Texture2D" uid="uid://bminufhx8mgxv" path="res://assets/images/progress bar/loadingFull.png" id="5_bc5qs"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_lhbou"]
 font_size = 32
@@ -36,3 +38,21 @@ offset_top = 12.0
 offset_right = 202.0
 offset_bottom = 55.0
 label_settings = SubResource("LabelSettings_lhbou")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -177.5
+offset_top = -80.0
+offset_right = 177.5
+offset_bottom = -26.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(2, 2)
+pivot_offset = Vector2(177, 54)
+value = 100.0
+texture_under = ExtResource("4_j8otk")
+texture_progress = ExtResource("5_bc5qs")

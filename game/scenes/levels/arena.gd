@@ -14,6 +14,6 @@ func _ready() -> void:
 func _on_timer_timeout() -> void:
 	spawner_component.spawn(snowmen_spawner_points.get_children().pick_random().global_position)
 	if randi()% 3 == 2:
-		$Timer.wait_time = .5
+		$Timer.wait_time = 1
 	else:
-		$Timer.wait_time = 2
+		$Timer.wait_time = 3
