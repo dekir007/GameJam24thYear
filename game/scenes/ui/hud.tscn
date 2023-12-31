@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b7wir6v0viwtk"]
+[gd_scene load_steps=13 format=3 uid="uid://b7wir6v0viwtk"]
 
 [ext_resource type="PackedScene" uid="uid://de3h10lhcnk3r" path="res://scenes/ui/pause_dialog.tscn" id="1"]
 [ext_resource type="Script" path="res://scenes/ui/hud.gd" id="1_gv0mc"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://fwfm83wy57a0" path="res://assets/images/health orb/itsmars_orb_fill.png" id="7_t32ny"]
 [ext_resource type="Texture2D" uid="uid://ckwt0o325xa5u" path="res://assets/images/health orb/itsmars_orb_back1.png" id="8_ngc1i"]
 [ext_resource type="Texture2D" uid="uid://dgryadau66kt5" path="res://assets/images/health orb/itsmars_orb_border.png" id="9_266w3"]
+[ext_resource type="Texture2D" uid="uid://bn7xedyklerp3" path="res://assets/images/escape icon.png" id="10_8fhm4"]
+[ext_resource type="Texture2D" uid="uid://c71khuehsa8t6" path="res://assets/images/escape icon pale.png" id="10_icx1o"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_lhbou"]
 font_size = 32
@@ -104,7 +106,7 @@ offset_right = -10.0
 offset_bottom = -10.0
 grow_horizontal = 0
 grow_vertical = 0
-value = 74.0
+value = 77.0
 fill_mode = 3
 texture_progress = ExtResource("7_t32ny")
 
@@ -133,3 +135,19 @@ offset_top = -230.0
 grow_horizontal = 0
 grow_vertical = 0
 texture = ExtResource("9_266w3")
+
+[node name="DashProgressBar" type="TextureProgressBar" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 37.0
+offset_top = -830.0
+offset_right = 837.0
+offset_bottom = -30.0
+grow_vertical = 0
+scale = Vector2(0.2, 0.2)
+pivot_offset = Vector2(0, 800)
+value = 100.0
+fill_mode = 5
+texture_under = ExtResource("10_icx1o")
+texture_progress = ExtResource("10_8fhm4")

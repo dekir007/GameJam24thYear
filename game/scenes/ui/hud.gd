@@ -4,6 +4,7 @@ extends CanvasLayer
 @onready var texture_progress_bar: TextureProgressBar = $TextureProgressBar
 @onready var health_orb: Control = $HealthOrb
 @onready var health_orb_bar: TextureProgressBar = $HealthOrb/HealthOrbBar
+@onready var dash_progress_bar: TextureProgressBar = $DashProgressBar
 
 func _ready() -> void:
 	health_orb.hide()

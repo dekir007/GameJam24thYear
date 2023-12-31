@@ -72,12 +72,20 @@ func _physics_process(delta: float) -> void:
 
 func dash():
 	if can_dash:
+		#var tw = get_tree().create_tween()
+		#tw.tween_property(self, "SPEED", 500, .3).from(2500).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUART)
 		SPEED *= 5
 		dashing = true
 		can_dash = false
+		var tw = get_tree().create_tween()
+		tw.tween_property(hud.dash_progress_bar, "value", 0, 0.2).from(100)
+		tw.play()
 		await get_tree().create_timer(.2).timeout
 		dashing = false
 		SPEED /= 5
+		tw = get_tree().create_tween()
+		tw.tween_property(hud.dash_progress_bar, "value", 100, 1.7).from(0)
+		tw.play()
 		await get_tree().create_timer(1.7).timeout
 		can_dash = true
 
