@@ -21,7 +21,7 @@ func _on_area_entered(area: Area3D) -> void:
 	var d = 2
 	
 	hit.emit(HitContext.new(d))
-	await get_tree().create_timer(0.5).timeout
+	await get_tree().create_timer(0.1).timeout
 	set_deferred("monitoring", true)
 	# TODO
 	#area.queue_free()
