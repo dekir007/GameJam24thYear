@@ -1,10 +1,13 @@
-[gd_scene load_steps=19 format=3 uid="uid://bg8631sd3swlm"]
+[gd_scene load_steps=23 format=3 uid="uid://bg8631sd3swlm"]
 
 [ext_resource type="Script" path="res://assets/ded.gd" id="1_q4un2"]
 [ext_resource type="Material" uid="uid://dl3oe85t8dho0" path="res://assets/ded.tres" id="2_cj3ts"]
 [ext_resource type="PackedScene" uid="uid://b7wir6v0viwtk" path="res://scenes/ui/hud.tscn" id="3_cdqsf"]
 [ext_resource type="PackedScene" uid="uid://bgehfpwlaunvl" path="res://scenes/components/spawner_component.tscn" id="4_1w46f"]
 [ext_resource type="PackedScene" uid="uid://c87821oeg37ns" path="res://scenes/objects/simple_bullet.tscn" id="5_xcanw"]
+[ext_resource type="AudioStream" uid="uid://u4kwbcm6ery2" path="res://assets/sounds/Gun Paintball Shot 8 - QuickSounds.com.mp3" id="6_dl6l2"]
+[ext_resource type="Script" path="res://scenes/components/HealthComponent.gd" id="7_dadwo"]
+[ext_resource type="Script" path="res://scenes/components/hit_box_component.gd" id="8_g4ydo"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fawkt"]
 
@@ -908,14 +911,19 @@ radius = 1.49961
 height = 5.91009
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3e7mg"]
-albedo_color = Color(0.898039, 0.101961, 0, 1)
+albedo_color = Color(0.784314, 0.752941, 0.0196078, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_4p45y"]
-radius = 0.2
-height = 0.4
+radius = 0.4
+height = 0.8
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gecg1"]
+size = Vector3(4, 7, 4)
 
 [node name="ded" type="CharacterBody3D" groups=["player"]]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+collision_layer = 4
+collision_mask = 5
 script = ExtResource("1_q4un2")
 SPEED = 350.0
 
@@ -1178,13 +1186,15 @@ shape = SubResource("CapsuleShape3D_cwv3c")
 [node name="Hud" parent="." instance=ExtResource("3_cdqsf")]
 
 [node name="CameraRig" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 17.195, 7.2)
 top_level = true
 
 [node name="Camera3D" type="Camera3D" parent="CameraRig"]
-transform = Transform3D(1, 0, 0, 0, 0.794351, 0.607459, 0, -0.607459, 0.794351, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.405142, 0.914254, 0, -0.914254, 0.405142, 0, 0, 0)
+fov = 35.0
 
 [node name="Cursor" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.67324)
 material_override = SubResource("StandardMaterial3D_3e7mg")
 mesh = SubResource("SphereMesh_4p45y")
 
@@ -1193,3 +1203,33 @@ scene = ExtResource("5_xcanw")
 
 [node name="Marker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.18236, 3.07959, -4.9411)
+
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="."]
+radius = 0.5
+height = 2.0
+
+[node name="ShootSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_dl6l2")
+volume_db = -8.0
+pitch_scale = 3.0
+
+[node name="ShootTimer" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("7_dadwo")
+
+[node name="HitBoxComponent" type="Area3D" parent="."]
+collision_layer = 4
+script = ExtResource("8_g4ydo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBoxComponent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.19535, 0)
+shape = SubResource("BoxShape3D_gecg1")
+
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
+[connection signal="health_changed" from="HealthComponent" to="." method="_on_health_component_health_changed"]
+[connection signal="area_entered" from="HitBoxComponent" to="HitBoxComponent" method="_on_area_entered"]
+[connection signal="hit" from="HitBoxComponent" to="." method="_on_hit_box_component_hit"]

@@ -1,10 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://b7wir6v0viwtk"]
+[gd_scene load_steps=13 format=3 uid="uid://b7wir6v0viwtk"]
 
 [ext_resource type="PackedScene" uid="uid://de3h10lhcnk3r" path="res://scenes/ui/pause_dialog.tscn" id="1"]
+[ext_resource type="Script" path="res://scenes/ui/hud.gd" id="1_gv0mc"]
 [ext_resource type="PackedScene" uid="uid://1iaqbf7npwiv" path="res://scenes/ui/game_over_dialog.tscn" id="2"]
+[ext_resource type="Texture2D" uid="uid://bmheldm5wuh4f" path="res://assets/images/progress bar/loadingEmpty.png" id="4_j8otk"]
+[ext_resource type="Texture2D" uid="uid://bminufhx8mgxv" path="res://assets/images/progress bar/loadingFull.png" id="5_bc5qs"]
+[ext_resource type="Texture2D" uid="uid://clemy7p15j3yj" path="res://assets/images/health orb/itsmars_orb_back2.png" id="6_re171"]
+[ext_resource type="Texture2D" uid="uid://fwfm83wy57a0" path="res://assets/images/health orb/itsmars_orb_fill.png" id="7_t32ny"]
+[ext_resource type="Texture2D" uid="uid://ckwt0o325xa5u" path="res://assets/images/health orb/itsmars_orb_back1.png" id="8_ngc1i"]
+[ext_resource type="Texture2D" uid="uid://dgryadau66kt5" path="res://assets/images/health orb/itsmars_orb_border.png" id="9_266w3"]
+[ext_resource type="Texture2D" uid="uid://bn7xedyklerp3" path="res://assets/images/escape icon.png" id="10_8fhm4"]
+[ext_resource type="Texture2D" uid="uid://c71khuehsa8t6" path="res://assets/images/escape icon pale.png" id="10_icx1o"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_lhbou"]
+font_size = 32
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
 
 [node name="Hud" type="CanvasLayer"]
 process_mode = 3
+script = ExtResource("1_gv0mc")
 
 [node name="Dialogs" type="Control" parent="."]
 layout_mode = 3
@@ -22,3 +37,117 @@ layout_mode = 1
 [node name="GameOverDialog" parent="Dialogs" instance=ExtResource("2")]
 visible = false
 layout_mode = 1
+
+[node name="Label" type="Label" parent="."]
+offset_left = 14.0
+offset_top = 12.0
+offset_right = 202.0
+offset_bottom = 55.0
+label_settings = SubResource("LabelSettings_lhbou")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -177.5
+offset_top = -80.0
+offset_right = 177.5
+offset_bottom = -26.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(2, 2)
+pivot_offset = Vector2(177, 54)
+value = 100.0
+texture_under = ExtResource("4_j8otk")
+texture_progress = ExtResource("5_bc5qs")
+
+[node name="HealthOrb" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -58.0
+offset_top = -60.0
+offset_right = -18.0
+offset_bottom = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(1.5, 1.5)
+
+[node name="Back" type="TextureRect" parent="HealthOrb"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -230.0
+offset_top = -222.0
+offset_bottom = -12.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("6_re171")
+
+[node name="HealthOrbBar" type="TextureProgressBar" parent="HealthOrb"]
+modulate = Color(0.964706, 0.101961, 0.156863, 1)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -220.0
+offset_top = -220.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+value = 77.0
+fill_mode = 3
+texture_progress = ExtResource("7_t32ny")
+
+[node name="under" type="TextureRect" parent="HealthOrb"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -230.0
+offset_top = -108.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("8_ngc1i")
+
+[node name="border" type="TextureRect" parent="HealthOrb"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -230.0
+offset_top = -230.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("9_266w3")
+
+[node name="DashProgressBar" type="TextureProgressBar" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 37.0
+offset_top = -830.0
+offset_right = 837.0
+offset_bottom = -30.0
+grow_vertical = 0
+scale = Vector2(0.2, 0.2)
+pivot_offset = Vector2(0, 800)
+value = 100.0
+fill_mode = 5
+texture_under = ExtResource("10_icx1o")
+texture_progress = ExtResource("10_8fhm4")

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://ccumghcbbaw4a"]
+
+[ext_resource type="Script" path="res://scenes/components/hit_box_component.gd" id="1_iv6q8"]
+
+[node name="HitBoxComponent" type="Area3D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_iv6q8")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

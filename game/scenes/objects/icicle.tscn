@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://dktkta0jq4uvb"]
+
+[ext_resource type="Script" path="res://scenes/objects/icicle.gd" id="1_eqsp3"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_p61m5"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7klw5"]
+size = Vector3(1, 0.2, 0.2)
+
+[node name="Icicle" type="Node3D" groups=["attack"]]
+script = ExtResource("1_eqsp3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -0.147371, 0, 0.105253, 0, 1, 0, -6.44178e-09, 0, 0, 0)
+mesh = SubResource("BoxMesh_p61m5")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4.53548e-10, 0.0086441, 0.00518799)
+shape = SubResource("BoxShape3D_7klw5")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

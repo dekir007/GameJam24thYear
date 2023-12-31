@@ -4,7 +4,7 @@
 	"bindings_column_names": ["Primary", "Secondary", "Game Pad"],
 	"bindings_column_types": ["key|mouse", "key|mouse", "pad"],
 	"mouse_settings": {
-		"show": true,
+		"show": false,
 		"default_invert_y": false,
 		"sensitivity": {
 			"min": 0.5,
@@ -32,6 +32,23 @@
 				"action_name": "move_right",
 				"display_name": "Right"
 				},
+				{
+				"action_name": "shift",
+				"display_name": "Sprint"
+				},
+				{
+				"action_name": "dash",
+				"display_name": "Dash"
+				},
+			]
+		},
+		{
+			"name" : "Attack",
+			"actions": [
+				{
+				"action_name": "click",
+				"display_name": "Shoot"
+				}
 			]
 		}
 	]

@@ -17,9 +17,11 @@ func _input(event):
 			visible = false
 			get_tree().paused = false
 			process_mode = Node.PROCESS_MODE_PAUSABLE
+			Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 		else:
 			visible = true
 			process_mode = Node.PROCESS_MODE_ALWAYS
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 			get_tree().paused = true
 			_resume_btn.grab_focus()
 
@@ -27,6 +29,7 @@ func _input(event):
 func _on_ResumeBtn_pressed():
 		visible = false
 		get_tree().paused = false
+		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 
 
 func _on_Settingsbtn_pressed():

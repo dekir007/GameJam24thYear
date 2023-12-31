@@ -1,1 +1,10 @@
-update res://assets/data/how_to_play.txt
+Controls:
+WASD - to move
+SHIFT - to sprint
+SPACE or Right Mouse Click - dash
+Left Mouse Click - shoot
+Esc - menu
+
+Goal:
+Snowmen attack and steal gifts prepared for little children! 
+Shoot 'em and save gifts!

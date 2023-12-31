@@ -9,9 +9,18 @@ const JUMP_VELOCITY = 4.5
 @onready var camera_rig: Node3D = $CameraRig
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var marker_3d: Marker3D = $Marker3D
+@onready var shoot_sound: AudioStreamPlayer = $ShootSound
+@onready var shoot_timer: Timer = $ShootTimer
+@onready var hud: CanvasLayer = $Hud
 
 @onready var spawner_component:  = $SpawnerComponent as SpawnerComponent
+@onready var health_component: = $HealthComponent as HealthComponent
 
+
+var can_shoot : bool = true
+
+var can_dash : bool = true
+var dashing : bool = false
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -19,15 +28,15 @@ var init_dist : Vector3
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	init_dist = Vector3(0,5,5)
+	init_dist = Vector3(0,17.2,7.2)
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+	#if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+		#velocity.y = JUMP_VELOCITY
 
 #region Velocity Calculation
 	var move_direction = Vector3()
@@ -42,13 +51,18 @@ func _physics_process(delta: float) -> void:
 		move_direction += camera_basis.x
 	move_direction.y = 0
 	
-	velocity = move_direction.normalized()*SPEED*delta
+	var max = Vector3(1,0,1) * 30
+	velocity = clamp(move_direction.normalized()*SPEED*delta, -max, max)
+	
 	if Input.is_action_pressed("shift"):
 		velocity *= 1.5
 #endregion
 	
-	if Input.is_action_just_pressed("click"):
+	if Input.is_action_pressed("click"):
 		shoot()
+	
+	if Input.is_action_just_pressed("dash"):
+		dash()
 	
 	camera_follows_player()
 	move_and_slide()
@@ -56,9 +70,32 @@ func _physics_process(delta: float) -> void:
 	
 	handle_anim()
 
+func dash():
+	if can_dash:
+		#var tw = get_tree().create_tween()
+		#tw.tween_property(self, "SPEED", 500, .3).from(2500).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUART)
+		SPEED *= 5
+		dashing = true
+		can_dash = false
+		var tw = get_tree().create_tween()
+		tw.tween_property(hud.dash_progress_bar, "value", 0, 0.2).from(100)
+		tw.play()
+		await get_tree().create_timer(.2).timeout
+		dashing = false
+		SPEED /= 5
+		tw = get_tree().create_tween()
+		tw.tween_property(hud.dash_progress_bar, "value", 100, 1.7).from(0)
+		tw.play()
+		await get_tree().create_timer(1.7).timeout
+		can_dash = true
+
 func handle_anim():
 	if velocity.length_squared() > 0:
-		animation_player.play("walk")
+		var dot = get_global_transform().basis.z.dot(velocity)
+		if get_global_transform().basis.z.dot(velocity) > 0:
+			animation_player.play_backwards("walk")
+		else:
+			animation_player.play("walk")
 	else:
 		animation_player.play("idle")
 
@@ -86,5 +123,22 @@ func look_at_cursor():
 		look_at(cursor_pos, Vector3.UP)
 
 func shoot():
+	if !can_shoot:
+		return
+	can_shoot = false
 	spawner_component.spawn(marker_3d.global_position, self)
-	print("111")
+	shoot_sound.play()
+	shoot_timer.start()
+
+func _on_shoot_timer_timeout() -> void:
+	can_shoot = true
+
+func _on_hit_box_component_hit(hit_context: RefCounted) -> void:
+	health_component.apply_damage(10)
+
+func _on_health_component_health_changed(upd: HealthUpdate) -> void:
+	hud.texture_progress_bar.value = float(upd.cur_hp)/upd.max_hp * 100
+	hud.health_orb_bar.value = float(upd.cur_hp)/upd.max_hp * 100
+
+func _on_health_component_died() -> void:
+	Globals.game_over()
