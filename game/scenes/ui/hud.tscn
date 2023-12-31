@@ -1,10 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://b7wir6v0viwtk"]
+[gd_scene load_steps=11 format=3 uid="uid://b7wir6v0viwtk"]
 
 [ext_resource type="PackedScene" uid="uid://de3h10lhcnk3r" path="res://scenes/ui/pause_dialog.tscn" id="1"]
 [ext_resource type="Script" path="res://scenes/ui/hud.gd" id="1_gv0mc"]
 [ext_resource type="PackedScene" uid="uid://1iaqbf7npwiv" path="res://scenes/ui/game_over_dialog.tscn" id="2"]
 [ext_resource type="Texture2D" uid="uid://bmheldm5wuh4f" path="res://assets/images/progress bar/loadingEmpty.png" id="4_j8otk"]
 [ext_resource type="Texture2D" uid="uid://bminufhx8mgxv" path="res://assets/images/progress bar/loadingFull.png" id="5_bc5qs"]
+[ext_resource type="Texture2D" uid="uid://clemy7p15j3yj" path="res://assets/images/health orb/itsmars_orb_back2.png" id="6_re171"]
+[ext_resource type="Texture2D" uid="uid://fwfm83wy57a0" path="res://assets/images/health orb/itsmars_orb_fill.png" id="7_t32ny"]
+[ext_resource type="Texture2D" uid="uid://ckwt0o325xa5u" path="res://assets/images/health orb/itsmars_orb_back1.png" id="8_ngc1i"]
+[ext_resource type="Texture2D" uid="uid://dgryadau66kt5" path="res://assets/images/health orb/itsmars_orb_border.png" id="9_266w3"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_lhbou"]
 font_size = 32
@@ -56,3 +60,76 @@ pivot_offset = Vector2(177, 54)
 value = 100.0
 texture_under = ExtResource("4_j8otk")
 texture_progress = ExtResource("5_bc5qs")
+
+[node name="HealthOrb" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -58.0
+offset_top = -60.0
+offset_right = -18.0
+offset_bottom = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(1.5, 1.5)
+
+[node name="Back" type="TextureRect" parent="HealthOrb"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -230.0
+offset_top = -222.0
+offset_bottom = -12.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("6_re171")
+
+[node name="HealthOrbBar" type="TextureProgressBar" parent="HealthOrb"]
+modulate = Color(0.964706, 0.101961, 0.156863, 1)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -220.0
+offset_top = -220.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+value = 74.0
+fill_mode = 3
+texture_progress = ExtResource("7_t32ny")
+
+[node name="under" type="TextureRect" parent="HealthOrb"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -230.0
+offset_top = -108.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("8_ngc1i")
+
+[node name="border" type="TextureRect" parent="HealthOrb"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -230.0
+offset_top = -230.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("9_266w3")

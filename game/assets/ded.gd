@@ -19,6 +19,9 @@ const JUMP_VELOCITY = 4.5
 
 var can_shoot : bool = true
 
+var can_dash : bool = true
+var dashing : bool = false
+
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 var init_dist : Vector3
@@ -32,8 +35,8 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+	#if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+		#velocity.y = JUMP_VELOCITY
 
 #region Velocity Calculation
 	var move_direction = Vector3()
@@ -48,7 +51,9 @@ func _physics_process(delta: float) -> void:
 		move_direction += camera_basis.x
 	move_direction.y = 0
 	
-	velocity = move_direction.normalized()*SPEED*delta
+	var max = Vector3(1,0,1) * 30
+	velocity = clamp(move_direction.normalized()*SPEED*delta, -max, max)
+	
 	if Input.is_action_pressed("shift"):
 		velocity *= 1.5
 #endregion
@@ -56,11 +61,25 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("click"):
 		shoot()
 	
+	if Input.is_action_just_pressed("dash"):
+		dash()
+	
 	camera_follows_player()
 	move_and_slide()
 	look_at_cursor()
 	
 	handle_anim()
+
+func dash():
+	if can_dash:
+		SPEED *= 5
+		dashing = true
+		can_dash = false
+		await get_tree().create_timer(.2).timeout
+		dashing = false
+		SPEED /= 5
+		await get_tree().create_timer(1.7).timeout
+		can_dash = true
 
 func handle_anim():
 	if velocity.length_squared() > 0:
@@ -108,10 +127,10 @@ func _on_shoot_timer_timeout() -> void:
 
 func _on_hit_box_component_hit(hit_context: RefCounted) -> void:
 	health_component.apply_damage(10)
-	print("ded hit")
 
 func _on_health_component_health_changed(upd: HealthUpdate) -> void:
 	hud.texture_progress_bar.value = float(upd.cur_hp)/upd.max_hp * 100
+	hud.health_orb_bar.value = float(upd.cur_hp)/upd.max_hp * 100
 
 func _on_health_component_died() -> void:
 	Globals.game_over()

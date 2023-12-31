@@ -73,6 +73,7 @@ func put_gift():
 	audio_put.play()
 	Globals.stolen_gift_count -= 1
 	Globals.gift_count -= 1
+	print("put; stolen: ", Globals.stolen_gift_count, "; ", Globals.gift_count)
 	if Globals.gift_count == 0:
 		Globals.game_over()
 
@@ -84,6 +85,7 @@ func _on_health_component_died() -> void:
 	Globals.score += 10
 	if has_gift(): # + Vector3.UP * 5
 		gift_spawner_component.spawn(global_position , get_tree().current_scene)
+		print("died; stolen: ", Globals.stolen_gift_count, "; ", Globals.gift_count)
 		Globals.stolen_gift_count -= 1
 		#Globals.gift_count += 1
 	# TODO
@@ -96,7 +98,6 @@ func _on_health_component_died() -> void:
 		icicle.speed = 10
 		get_parent().add_child(icicle)
 		icicle.global_position = global_position
-		print("icicle")
 	
 	
 	queue_free()

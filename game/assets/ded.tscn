@@ -911,11 +911,11 @@ radius = 1.49961
 height = 5.91009
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3e7mg"]
-albedo_color = Color(0.898039, 0.101961, 0, 1)
+albedo_color = Color(0.784314, 0.752941, 0.0196078, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_4p45y"]
-radius = 0.2
-height = 0.4
+radius = 0.4
+height = 0.8
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gecg1"]
 size = Vector3(4, 7, 4)

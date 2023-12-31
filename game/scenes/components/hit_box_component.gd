@@ -15,12 +15,14 @@ func _on_area_entered(area: Area3D) -> void:
 		return
 	# TODO
 	#area = area as AttackSphere
-	
+	set_deferred("monitoring", false)
 	#var d = (area.skill as Skill).attack(area.attacker, core)
+	
 	var d = 2
 	
 	hit.emit(HitContext.new(d))
-	
+	await get_tree().create_timer(0.5).timeout
+	set_deferred("monitoring", true)
 	# TODO
 	#area.queue_free()
 

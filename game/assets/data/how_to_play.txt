@@ -1,6 +1,7 @@
 Controls:
 WASD - to move
 SHIFT - to sprint
+SPACE or Right Mouse Click - dash
 Left Mouse Click - shoot
 Esc - menu
 
