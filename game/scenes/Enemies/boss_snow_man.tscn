@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://dmwiwjcccolb3"]
+[gd_scene load_steps=32 format=3 uid="uid://dmwiwjcccolb3"]
 
 [ext_resource type="Script" path="res://scenes/Enemies/boss_snow_man.gd" id="1_ib5s5"]
 [ext_resource type="PackedScene" uid="uid://bgehfpwlaunvl" path="res://scenes/components/spawner_component.tscn" id="2_jq2kl"]
@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://cfftep6odpudu" path="res://scenes/objects/progress_bar.tscn" id="6_jd1g4"]
 [ext_resource type="PackedScene" uid="uid://ccumghcbbaw4a" path="res://scenes/components/hit_box_component.tscn" id="7_orubc"]
 [ext_resource type="PackedScene" uid="uid://yyi4nmski8oe" path="res://scenes/blizzard.tscn" id="8_jo7dy"]
-[ext_resource type="PackedScene" uid="uid://b2n1hle03tsbg" path="res://scenes/objects/ray.tscn" id="8_rejj8"]
 [ext_resource type="PackedScene" uid="uid://ckhyl87e8uuc6" path="res://ready/gift.tscn" id="9_bofne"]
 [ext_resource type="AudioStream" uid="uid://eccycxyng740" path="res://assets/sounds/+1.mp3" id="10_g63qc"]
 [ext_resource type="AudioStream" uid="uid://cdrpl57m36un4" path="res://assets/sounds/+1 multiplier.mp3" id="11_yt6wc"]
@@ -1053,9 +1052,6 @@ size = Vector3(2, 0.2, 0.1)
 
 [node name="GiftPos" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.507198, -0.694776)
-
-[node name="FrostRay" parent="GiftPos" instance=ExtResource("8_rejj8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0370095, 0)
 
 [node name="HitBoxComponent" parent="." instance=ExtResource("7_orubc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.314562, -0.0740833)

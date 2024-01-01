@@ -16,8 +16,6 @@ extends CharacterBody3D
 @onready var progress_bar:  = $OverHead/ProgressBar as ProgressBar3D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
-@onready var frost_ray: Node3D = $GiftPos/FrostRay
-
 const ICICLE = preload("res://scenes/objects/icicle.tscn")
 
 var can_dash = true
@@ -32,7 +30,6 @@ func _ready() -> void:
 		damage = Damage.new()
 		damage.damage = 5
 	target = get_tree().get_first_node_in_group("player")#get_tree().get_nodes_in_group("gift").reduce(func(accum : Node3D, node : Node3D): return node if node.global_position.distance_to(global_position) < accum.global_position.distance_to(global_position) else accum)
-	frost_ray.target = target
 
 func _physics_process(delta: float) -> void:
 	#if target == null:

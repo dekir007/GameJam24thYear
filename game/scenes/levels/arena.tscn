@@ -482,7 +482,6 @@ volume_db = -8.0
 autoplay = true
 
 [node name="BossTimer" type="Timer" parent="."]
-wait_time = 5.0
 autostart = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
