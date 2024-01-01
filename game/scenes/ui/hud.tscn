@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b7wir6v0viwtk"]
+[gd_scene load_steps=14 format=3 uid="uid://b7wir6v0viwtk"]
 
 [ext_resource type="PackedScene" uid="uid://de3h10lhcnk3r" path="res://scenes/ui/pause_dialog.tscn" id="1"]
 [ext_resource type="Script" path="res://scenes/ui/hud.gd" id="1_gv0mc"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://dgryadau66kt5" path="res://assets/images/health orb/itsmars_orb_border.png" id="9_266w3"]
 [ext_resource type="Texture2D" uid="uid://bn7xedyklerp3" path="res://assets/images/escape icon.png" id="10_8fhm4"]
 [ext_resource type="Texture2D" uid="uid://c71khuehsa8t6" path="res://assets/images/escape icon pale.png" id="10_icx1o"]
+[ext_resource type="Texture2D" uid="uid://bk6r7p1kd5oja" path="res://assets/images/white_square_64x64.png" id="12_poji6"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_lhbou"]
 font_size = 32
@@ -151,3 +152,13 @@ value = 100.0
 fill_mode = 5
 texture_under = ExtResource("10_icx1o")
 texture_progress = ExtResource("10_8fhm4")
+
+[node name="GetHit" type="TextureRect" parent="."]
+modulate = Color(0.858824, 0.305882, 0.0941176, 0.596078)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("12_poji6")

@@ -26,13 +26,13 @@ func _ready() -> void:
 	if damage == null:
 		damage = Damage.new()
 		damage.damage = 5
-	target = get_tree().get_nodes_in_group("gift").reduce(func(accum : Node3D, node : Node3D): return node if node.global_position.distance_to(global_position) < accum.global_position.distance_to(global_position) else accum)
+	target = get_tree().get_first_node_in_group("player")#get_tree().get_nodes_in_group("gift").reduce(func(accum : Node3D, node : Node3D): return node if node.global_position.distance_to(global_position) < accum.global_position.distance_to(global_position) else accum)
 
 func _physics_process(delta: float) -> void:
-	if target == null:
-		target = get_tree().get_nodes_in_group("gift").reduce(func(accum : Node3D, node : Node3D): return node if node.global_position.distance_to(global_position) < accum.global_position.distance_to(global_position) else accum)
-		if target == null:
-			target = get_tree().get_first_node_in_group("player")
+	#if target == null:
+		#target = get_tree().get_nodes_in_group("gift").reduce(func(accum : Node3D, node : Node3D): return node if node.global_position.distance_to(global_position) < accum.global_position.distance_to(global_position) else accum)
+		#if target == null:
+			#target = get_tree().get_first_node_in_group("player")
 	var target_global_position = target.global_position
 	
 	nav_agent.target_position = target_global_position
@@ -62,38 +62,9 @@ func dash():
 		await get_tree().create_timer(1.7).timeout
 		can_dash = true
 
-func grab_gift():
-	target.get_grabbed()
-	var gift = gift_spawner_component.spawn(gift_pos.global_position, gift_pos) as Node3D
-	gift.remove_from_group("gift")
-	gift.scale /= 3
-	
-	target = get_tree().get_nodes_in_group("escape_points").pick_random()
-	audio_grabbed.play()
-
-func put_gift():
-	var gift = gift_pos.get_child(0)
-	gift.queue_free()
-	target = get_tree().get_nodes_in_group("gift").reduce(func(accum : Node3D, node : Node3D): return node if node.global_position.distance_to(global_position) < accum.global_position.distance_to(global_position) else accum)
-	audio_put.play()
-	Globals.stolen_gift_count -= 1
-	Globals.gift_count -= 1
-	#print("put; stolen: ", Globals.stolen_gift_count, "; ", Globals.gift_count)
-	if Globals.gift_count == 0:
-		Globals.game_over()
-
-func has_gift():
-	return gift_pos.get_child_count() > 0
-
 func _on_health_component_died() -> void:
 	death_spawner_component.spawn(global_position, get_parent())
-	Globals.score += 10
-	if has_gift(): # + Vector3.UP * 5
-		gift_spawner_component.spawn(global_position , get_tree().current_scene)
-		#print("died; stolen: ", Globals.stolen_gift_count, "; ", Globals.gift_count)
-		Globals.stolen_gift_count -= 1
-		#Globals.gift_count += 1
-	# TODO
+	Globals.score += 100
 	var num = randi_range(3, 8)
 	for i in range(num):
 		var a = PI * i * (2. / num)
@@ -121,14 +92,9 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity: Vector3) -> void:
 
 func _on_navigation_agent_3d_target_reached() -> void:
 	if target != null:
-		if !has_gift() and target.is_in_group("gift"):
-			grab_gift()
-		elif target.is_in_group("escape_points"):
-			put_gift()
-		else:
-			#print("reached ded")
-			if !animation_player.is_playing():
-				animation_player.play("attack")
+		print("boss reached ded")
+		if !animation_player.is_playing():
+			animation_player.play("attack")
 
 
 func _on_health_component_health_changed(upd: HealthUpdate) -> void:

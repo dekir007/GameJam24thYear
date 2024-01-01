@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bbcn5500k4yyr"
+path="res://.godot/imported/hit4.ogg-0391a1deb69ec9eae5ab73265822f4d9.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sounds/hit sounds/hit4.ogg"
+dest_files=["res://.godot/imported/hit4.ogg-0391a1deb69ec9eae5ab73265822f4d9.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

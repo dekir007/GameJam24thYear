@@ -2,6 +2,8 @@ extends CharacterBody3D
 
 
 @export var SPEED : = 500.0
+@export var damage : Damage #= Damage.new(5,0)
+
 const JUMP_VELOCITY = 4.5
 
 @onready var camera = $CameraRig/Camera3D
@@ -12,9 +14,11 @@ const JUMP_VELOCITY = 4.5
 @onready var shoot_sound: AudioStreamPlayer = $ShootSound
 @onready var shoot_timer: Timer = $ShootTimer
 @onready var hud: CanvasLayer = $Hud
+@onready var hit_sound: AudioStreamPlayer = $HitSound
 
 @onready var spawner_component:  = $SpawnerComponent as SpawnerComponent
 @onready var health_component: = $HealthComponent as HealthComponent
+@onready var hit_box_component: HitBoxComponent = $HitBoxComponent
 
 
 var can_shoot : bool = true
@@ -126,15 +130,17 @@ func shoot():
 	if !can_shoot:
 		return
 	can_shoot = false
-	spawner_component.spawn(marker_3d.global_position, self)
+	spawner_component.spawn(marker_3d.global_position, self, damage)
 	shoot_sound.play()
 	shoot_timer.start()
 
 func _on_shoot_timer_timeout() -> void:
 	can_shoot = true
 
-func _on_hit_box_component_hit(hit_context: RefCounted) -> void:
-	health_component.apply_damage(10)
+func _on_hit_box_component_hit(hit_context: HitBoxComponent.HitContext) -> void:
+	health_component.apply_damage(hit_context.damage)
+	hud.show_red()
+	hit_sound.play()
 
 func _on_health_component_health_changed(upd: HealthUpdate) -> void:
 	hud.texture_progress_bar.value = float(upd.cur_hp)/upd.max_hp * 100

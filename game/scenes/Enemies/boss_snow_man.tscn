@@ -1,16 +1,22 @@
-[gd_scene load_steps=21 format=3 uid="uid://d4beuuagle5ei"]
+[gd_scene load_steps=23 format=3 uid="uid://dmwiwjcccolb3"]
 
-[ext_resource type="Script" path="res://scenes/Enemies/snow_man.gd" id="1_bs3mb"]
-[ext_resource type="PackedScene" uid="uid://bgehfpwlaunvl" path="res://scenes/components/spawner_component.tscn" id="2_eh7bk"]
-[ext_resource type="PackedScene" uid="uid://orqq154lnhqm" path="res://scenes/death_particles.tscn" id="3_p2jkp"]
-[ext_resource type="PackedScene" uid="uid://c34cc3hoyt8sc" path="res://scenes/floating_text_3d.tscn" id="4_hcixu"]
-[ext_resource type="PackedScene" uid="uid://d3recwm5ur062" path="res://scenes/components/health_component.tscn" id="4_ta14i"]
-[ext_resource type="PackedScene" uid="uid://ccumghcbbaw4a" path="res://scenes/components/hit_box_component.tscn" id="6_6oybw"]
-[ext_resource type="PackedScene" uid="uid://cfftep6odpudu" path="res://scenes/objects/progress_bar.tscn" id="6_v43yh"]
-[ext_resource type="PackedScene" uid="uid://yyi4nmski8oe" path="res://scenes/blizzard.tscn" id="7_8lmh0"]
-[ext_resource type="PackedScene" uid="uid://ckhyl87e8uuc6" path="res://ready/gift.tscn" id="8_t8n57"]
-[ext_resource type="AudioStream" uid="uid://eccycxyng740" path="res://assets/sounds/+1.mp3" id="9_mvysl"]
-[ext_resource type="AudioStream" uid="uid://cdrpl57m36un4" path="res://assets/sounds/+1 multiplier.mp3" id="10_nhih7"]
+[ext_resource type="Script" path="res://scenes/Enemies/boss_snow_man.gd" id="1_ib5s5"]
+[ext_resource type="PackedScene" uid="uid://bgehfpwlaunvl" path="res://scenes/components/spawner_component.tscn" id="2_jq2kl"]
+[ext_resource type="Script" path="res://scripts/Damage.gd" id="2_sthgw"]
+[ext_resource type="PackedScene" uid="uid://orqq154lnhqm" path="res://scenes/death_particles.tscn" id="3_b8lkx"]
+[ext_resource type="PackedScene" uid="uid://c34cc3hoyt8sc" path="res://scenes/floating_text_3d.tscn" id="4_8gaqh"]
+[ext_resource type="PackedScene" uid="uid://d3recwm5ur062" path="res://scenes/components/health_component.tscn" id="5_opdxs"]
+[ext_resource type="PackedScene" uid="uid://cfftep6odpudu" path="res://scenes/objects/progress_bar.tscn" id="6_jd1g4"]
+[ext_resource type="PackedScene" uid="uid://ccumghcbbaw4a" path="res://scenes/components/hit_box_component.tscn" id="7_orubc"]
+[ext_resource type="PackedScene" uid="uid://yyi4nmski8oe" path="res://scenes/blizzard.tscn" id="8_jo7dy"]
+[ext_resource type="PackedScene" uid="uid://ckhyl87e8uuc6" path="res://ready/gift.tscn" id="9_bofne"]
+[ext_resource type="AudioStream" uid="uid://eccycxyng740" path="res://assets/sounds/+1.mp3" id="10_g63qc"]
+[ext_resource type="AudioStream" uid="uid://cdrpl57m36un4" path="res://assets/sounds/+1 multiplier.mp3" id="11_yt6wc"]
+
+[sub_resource type="Resource" id="Resource_atwgj"]
+script = ExtResource("2_sthgw")
+damage = 20
+penetration = 0.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_tcg48"]
 
@@ -30,6 +36,57 @@ height = 1.0
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ym7gj"]
 radius = 0.617416
 height = 2.27718
+
+[sub_resource type="Animation" id="Animation_55hkr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body/RightHand:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.332081, 0.534116, 0.330835)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body/RightHand:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-3.13185e-08, -1.32182e-08, 0.79875)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Body/LeftHand:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.332081, 0.534116, -0.36295)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Body/LeftHand:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-2.95152e-08, -1.14695e-08, 0.741276)]
+}
 
 [sub_resource type="Animation" id="Animation_001io"]
 resource_name = "grab"
@@ -97,57 +154,6 @@ tracks/4/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_55hkr"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Body/RightHand:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0.332081, 0.534116, 0.330835)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Body/RightHand:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(-3.13185e-08, -1.32182e-08, 0.79875)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Body/LeftHand:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0.332081, 0.534116, -0.36295)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Body/LeftHand:rotation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(-2.95152e-08, -1.14695e-08, 0.741276)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_227i7"]
 _data = {
 "RESET": SubResource("Animation_55hkr"),
@@ -157,10 +163,12 @@ _data = {
 [sub_resource type="BoxShape3D" id="BoxShape3D_j6mg2"]
 size = Vector3(1.24536, 1, 1.06885)
 
-[node name="SnowMan" type="CharacterBody3D"]
+[node name="BossSnowMan" type="CharacterBody3D"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 collision_layer = 4
 collision_mask = 7
-script = ExtResource("1_bs3mb")
+script = ExtResource("1_ib5s5")
+damage = SubResource("Resource_atwgj")
 
 [node name="Body" type="Node3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
@@ -192,7 +200,7 @@ mesh = SubResource("SphereMesh_tcg48")
 skeleton = NodePath("../..")
 
 [node name="LeftHand" type="MeshInstance3D" parent="Body"]
-transform = Transform3D(0.737607, -0.67523, -1.14696e-08, 0.67523, 0.737607, 2.95152e-08, -1.14695e-08, -2.95152e-08, 1, 0.332081, 0.534116, -0.36295)
+transform = Transform3D(0.737607, -0.67523, -1.14695e-08, 0.67523, 0.737607, 2.95152e-08, -1.14695e-08, -2.95152e-08, 1, 0.332081, 0.534116, -0.36295)
 mesh = SubResource("CylinderMesh_214xm")
 
 [node name="RightHand" type="MeshInstance3D" parent="Body"]
@@ -203,25 +211,24 @@ mesh = SubResource("CylinderMesh_214xm")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.471435, 0)
 shape = SubResource("CapsuleShape3D_uph77")
 
-[node name="DeathSpawnerComponent" parent="." instance=ExtResource("2_eh7bk")]
-scene = ExtResource("3_p2jkp")
+[node name="DeathSpawnerComponent" parent="." instance=ExtResource("2_jq2kl")]
+scene = ExtResource("3_b8lkx")
 
-[node name="DamageLabelSpawnerComponent" parent="." instance=ExtResource("2_eh7bk")]
-scene = ExtResource("4_hcixu")
+[node name="DamageLabelSpawnerComponent" parent="." instance=ExtResource("2_jq2kl")]
+scene = ExtResource("4_8gaqh")
 
-[node name="HealthComponent" parent="." instance=ExtResource("4_ta14i")]
-max_health = 10
+[node name="HealthComponent" parent="." instance=ExtResource("5_opdxs")]
 
 [node name="OverHead" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.69634, 0)
 
-[node name="ProgressBar" parent="OverHead" instance=ExtResource("6_v43yh")]
+[node name="ProgressBar" parent="OverHead" instance=ExtResource("6_jd1g4")]
 size = Vector3(2, 0.3, 0.1)
 
 [node name="GiftPos" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.507198, -0.694776)
 
-[node name="HitBoxComponent" parent="." instance=ExtResource("6_6oybw")]
+[node name="HitBoxComponent" parent="." instance=ExtResource("7_orubc")]
 collision_layer = 2
 collision_mask = 3
 
@@ -229,23 +236,23 @@ collision_mask = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.472336, 0)
 shape = SubResource("CapsuleShape3D_ym7gj")
 
-[node name="Blizzard" parent="." instance=ExtResource("7_8lmh0")]
+[node name="Blizzard" parent="." instance=ExtResource("8_jo7dy")]
 emitting = false
 
-[node name="GiftSpawnerComponent" parent="." instance=ExtResource("2_eh7bk")]
-scene = ExtResource("8_t8n57")
+[node name="GiftSpawnerComponent" parent="." instance=ExtResource("2_jq2kl")]
+scene = ExtResource("9_bofne")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
-target_desired_distance = 1.5
+target_desired_distance = 2.5
 path_height_offset = 0.1
 avoidance_enabled = true
 radius = 0.4
 
 [node name="AudioGrabbed" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("9_mvysl")
+stream = ExtResource("10_g63qc")
 
 [node name="AudioPut" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("10_nhih7")
+stream = ExtResource("11_yt6wc")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

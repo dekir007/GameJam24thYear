@@ -2,7 +2,9 @@ extends Node3D
 class_name SimpleBullet
 
 @export var direction:Vector3
-@export var speed:float = 1000
+@export var speed:float = 5000
+@export var damage : Damage
+
 @onready var gpu_particles_3d: GPUParticles3D = $GPUParticles3D
 @onready var mesh: MeshInstance3D = $MeshInstance3D
 
@@ -11,6 +13,9 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	global_position += direction*speed*delta
+
+func get_data(_damage : Damage):
+	damage = _damage
 
 func _on_timer_timeout() -> void:
 	queue_free()

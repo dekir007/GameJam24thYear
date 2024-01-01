@@ -21,6 +21,9 @@ var is_dead : bool :
 func apply_damage(damage : int, 
 	#no_signal : bool = true
 	):
+	if is_dead:
+		print("already dead")
+		return
 	hp -= damage
 	if is_dead:
 		died.emit()

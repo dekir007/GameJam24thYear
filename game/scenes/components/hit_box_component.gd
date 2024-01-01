@@ -4,28 +4,32 @@ class_name HitBoxComponent
 
 signal hit(hit_context : HitContext)
 
+@export var defense : Defense
 
 func _ready() -> void:
-	pass
+	if defense == null:
+		defense = Defense.new()
+		defense.defense = 0
 	#if core == null:
 	#	core = owner.find_child("CoreComponent")
 
 func _on_area_entered(area: Area3D) -> void:
-	if !area.is_in_group("attack") and !area.get_parent().is_in_group("attack"):
+	var attack_node = area.get_parent() as Node3D
+	if !attack_node.is_in_group("attack"):
 		return
 	# TODO
-	#area = area as AttackSphere
+	get_hit(attack_node.damage)
+	#area.queue_free()
+
+func get_hit(damage : Damage):
 	set_deferred("monitoring", false)
 	#var d = (area.skill as Skill).attack(area.attacker, core)
 	
-	var d = 2
+	var d = damage.damage * clamp(1 - defense.defense + damage.penetration, 0, 1) # мда, тавтология вышла
 	
 	hit.emit(HitContext.new(d))
 	await get_tree().create_timer(0.1).timeout
 	set_deferred("monitoring", true)
-	# TODO
-	#area.queue_free()
-
 
 class HitContext extends RefCounted:
 	#var attacker : CoreComponent

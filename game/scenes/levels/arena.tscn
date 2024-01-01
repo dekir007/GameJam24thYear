@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bbfn02d86am50"]
+[gd_scene load_steps=23 format=3 uid="uid://bbfn02d86am50"]
 
 [ext_resource type="Texture2D" uid="uid://c0xob482vgfb8" path="res://assets/noise.png" id="1_haccv"]
 [ext_resource type="Script" path="res://scenes/levels/arena.gd" id="1_u3e63"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bg8631sd3swlm" path="res://assets/ded.tscn" id="4_2rjso"]
 [ext_resource type="PackedScene" uid="uid://b21bj1qicc13t" path="res://ready/house_1.tscn" id="4_hb4m2"]
 [ext_resource type="PackedScene" uid="uid://bfdjy824dap48" path="res://ready/house_2.tscn" id="5_acsjm"]
+[ext_resource type="PackedScene" uid="uid://dmwiwjcccolb3" path="res://scenes/Enemies/boss_snow_man.tscn" id="6_agv1d"]
 [ext_resource type="PackedScene" uid="uid://dwkudvm75wuxu" path="res://ready/house_3.tscn" id="6_o6dph"]
 [ext_resource type="PackedScene" uid="uid://b0rqfh1625xm0" path="res://ready/snow.tscn" id="7_ma2cr"]
 [ext_resource type="PackedScene" uid="uid://w4ff73vo73g3" path="res://ready/zabor.tscn" id="8_g8tow"]
@@ -58,6 +59,9 @@ transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -12.7565, 0.0326236,
 
 [node name="SpawnerComponent" parent="." instance=ExtResource("12_jtnkr")]
 scene = ExtResource("13_hwb8b")
+
+[node name="BossSpawnerComponent" parent="." instance=ExtResource("12_jtnkr")]
+scene = ExtResource("6_agv1d")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0
@@ -414,4 +418,9 @@ stream = ExtResource("15_2aa2e")
 volume_db = -8.0
 autoplay = true
 
+[node name="BossTimer" type="Timer" parent="."]
+wait_time = 30.0
+autostart = true
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="BossTimer" to="." method="_on_boss_timer_timeout"]
