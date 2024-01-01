@@ -20,9 +20,10 @@ func _on_timer_timeout() -> void:
 		$Timer.wait_time = 1.25 * difficulty
 	else:
 		$Timer.wait_time = 4 * difficulty
-	if difficulty < 0.3:
-		difficulty -= 0.01
+	if difficulty > 0.5:
+		difficulty -= 0.0033
 	
 
 func _on_boss_timer_timeout() -> void:
 	boss_spawner_component.spawn(snowmen_spawner_points.get_children().pick_random().global_position)
+	$BossTimer.wait_time = 30 * difficulty

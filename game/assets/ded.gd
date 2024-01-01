@@ -36,6 +36,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
+	#print(transform.basis.z.normalized())
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 	# Handle jump.
@@ -55,8 +56,8 @@ func _physics_process(delta: float) -> void:
 		move_direction += camera_basis.x
 	move_direction.y = 0
 	
-	var max = Vector3(1,0,1) * 30
-	velocity = clamp(move_direction.normalized()*SPEED*delta, -max, max)
+	var max_vel = Vector3(1,0,1) * 30
+	velocity = clamp(move_direction.normalized()*SPEED*delta, -max_vel, max_vel)
 	
 	if Input.is_action_pressed("shift"):
 		velocity *= 1.5

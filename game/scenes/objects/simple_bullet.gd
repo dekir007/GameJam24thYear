@@ -20,17 +20,12 @@ func get_data(_damage : Damage):
 func _on_timer_timeout() -> void:
 	queue_free()
 
-func _on_area_3d_area_entered(_area: Area3D) -> void:
+func delete():
 	gpu_particles_3d.emitting=true
 	speed = 0
 	mesh.hide()
 	$Area3D/CollisionShape3D.call_deferred("set_disabled", true)
 	get_tree().create_timer(gpu_particles_3d.lifetime).timeout.connect(queue_free)
-
 
 func _on_area_3d_body_entered(_body: Node3D) -> void:
-	gpu_particles_3d.emitting=true
-	speed = 0
-	mesh.hide()
-	$Area3D/CollisionShape3D.call_deferred("set_disabled", true)
-	get_tree().create_timer(gpu_particles_3d.lifetime).timeout.connect(queue_free)
+	delete()

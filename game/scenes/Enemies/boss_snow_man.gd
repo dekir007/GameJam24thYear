@@ -16,17 +16,23 @@ extends CharacterBody3D
 @onready var progress_bar:  = $OverHead/ProgressBar as ProgressBar3D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
+@onready var frost_ray: Node3D = $GiftPos/FrostRay
+
 const ICICLE = preload("res://scenes/objects/icicle.tscn")
 
 var can_dash = true
 var dashing = false
 
+var is_player_in_range : bool = false
+
 func _ready() -> void:
+	animation_player.play("bad walk")
 	#grab_gift()
 	if damage == null:
 		damage = Damage.new()
 		damage.damage = 5
 	target = get_tree().get_first_node_in_group("player")#get_tree().get_nodes_in_group("gift").reduce(func(accum : Node3D, node : Node3D): return node if node.global_position.distance_to(global_position) < accum.global_position.distance_to(global_position) else accum)
+	frost_ray.target = target
 
 func _physics_process(delta: float) -> void:
 	#if target == null:
@@ -65,7 +71,7 @@ func dash():
 func _on_health_component_died() -> void:
 	death_spawner_component.spawn(global_position, get_parent())
 	Globals.score += 100
-	var num = randi_range(3, 8)
+	var num = randi_range(6, 12)
 	for i in range(num):
 		var a = PI * i * (2. / num)
 		var dir = Vector3.FORWARD.rotated(Vector3.UP, a)
@@ -93,15 +99,23 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity: Vector3) -> void:
 func _on_navigation_agent_3d_target_reached() -> void:
 	if target != null:
 		print("boss reached ded")
-		if !animation_player.is_playing():
-			animation_player.play("attack")
+		animation_player.play("bad attack")
 
 
 func _on_health_component_health_changed(upd: HealthUpdate) -> void:
 	progress_bar.value = float(upd.cur_hp) / upd.max_hp 
 
 func hit():
-	if $CheckPlayer.has_overlapping_bodies() and target.is_in_group("player"):
+	if is_player_in_range:
 		# TODO with hit box
 		target.hit_box_component.get_hit(damage)
 
+func _on_animation_player_animation_finished(_anim_name: StringName) -> void:
+	if !animation_player.is_playing():
+		animation_player.play("bad walk")
+
+func _on_check_player_body_entered(_body: Node3D) -> void:
+	is_player_in_range = true
+
+func _on_check_player_body_exited(_body: Node3D) -> void:
+	is_player_in_range = false

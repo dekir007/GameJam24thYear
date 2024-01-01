@@ -22,6 +22,7 @@ var can_dash = true
 var dashing = false
 
 func _ready() -> void:
+	animation_player.play("walk")
 	#grab_gift()
 	if damage == null:
 		damage = Damage.new()
@@ -63,15 +64,17 @@ func dash():
 		can_dash = true
 
 func grab_gift():
+	animation_player.play("gift")
 	target.get_grabbed()
 	var gift = gift_spawner_component.spawn(gift_pos.global_position, gift_pos) as Node3D
 	gift.remove_from_group("gift")
-	gift.scale /= 3
+	gift.scale /= 2
 	
 	target = get_tree().get_nodes_in_group("escape_points").pick_random()
 	audio_grabbed.play()
 
 func put_gift():
+	animation_player.play("walk")
 	var gift = gift_pos.get_child(0)
 	gift.queue_free()
 	target = get_tree().get_nodes_in_group("gift").reduce(func(accum : Node3D, node : Node3D): return node if node.global_position.distance_to(global_position) < accum.global_position.distance_to(global_position) else accum)
@@ -82,6 +85,10 @@ func put_gift():
 	if Globals.gift_count == 0:
 		Globals.game_over()
 
+func get_data(health:int):
+	health_component.max_health = health
+	health_component.heal(health)
+
 func has_gift():
 	return gift_pos.get_child_count() > 0
 
@@ -90,11 +97,12 @@ func _on_health_component_died() -> void:
 	Globals.score += 10
 	if has_gift(): # + Vector3.UP * 5
 		gift_spawner_component.spawn(global_position , get_tree().current_scene)
+		gift_pos.get_child(0).queue_free()
 		#print("died; stolen: ", Globals.stolen_gift_count, "; ", Globals.gift_count)
 		Globals.stolen_gift_count -= 1
 		#Globals.gift_count += 1
 	# TODO
-	var num = randi_range(3, 8)
+	var num = randi_range(3, 5)
 	for i in range(num):
 		var a = PI * i * (2. / num)
 		var dir = Vector3.FORWARD.rotated(Vector3.UP, a)
@@ -102,7 +110,7 @@ func _on_health_component_died() -> void:
 		icicle.dir = dir #global_position.direction_to(get_tree().get_first_node_in_group("player").global_position)
 		icicle.speed = 10
 		icicle.damage = Damage.new()
-		icicle.damage.damage = randi_range(5, 15)
+		icicle.damage.damage = randi_range(3, 5)
 		get_parent().add_child(icicle)
 		icicle.global_position = global_position
 	
@@ -114,10 +122,9 @@ func _on_hit_box_component_hit(hit_context: HitBoxComponent.HitContext) -> void:
 	damage_label_spawner_component.spawn(over_head.global_position, get_parent(), {"amount" : hit_context.damage})
 
 func _on_navigation_agent_3d_velocity_computed(safe_velocity: Vector3) -> void:
-	var vel_max = Vector3(30,30,30) # снеговики могут улететь в стратосферу, когда сверху перса
+	var vel_max = Vector3(30,0,30) # снеговики могут улететь в стратосферу, когда сверху перса
 	velocity = clamp(lerp(velocity, safe_velocity, get_process_delta_time() * 10), -vel_max, vel_max)
 	move_and_slide()
-
 
 func _on_navigation_agent_3d_target_reached() -> void:
 	if target != null:
@@ -125,10 +132,10 @@ func _on_navigation_agent_3d_target_reached() -> void:
 			grab_gift()
 		elif target.is_in_group("escape_points"):
 			put_gift()
-		else:
-			#print("reached ded")
-			if !animation_player.is_playing():
-				animation_player.play("attack")
+		#else:
+			##print("reached ded")
+			#if !animation_player.is_playing():
+				#animation_player.play("attack")
 
 
 func _on_health_component_health_changed(upd: HealthUpdate) -> void:
@@ -139,3 +146,11 @@ func hit():
 		# TODO with hit box
 		target.hit_box_component.get_hit(damage)
 
+
+# TODO have no idea if it will work...
+func _on_tree_exiting() -> void:
+	if has_gift(): # + Vector3.UP * 5
+		gift_spawner_component.spawn(global_position , get_tree().current_scene)
+		#print("died; stolen: ", Globals.stolen_gift_count, "; ", Globals.gift_count)
+		Globals.stolen_gift_count -= 1
+		#Globals.gift_count += 1

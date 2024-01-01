@@ -16,6 +16,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	position += dir * speed * delta
 
+func delete():
+	queue_free()
+
 func _on_area_3d_area_entered(_area: Area3D) -> void:
 	queue_free()
 

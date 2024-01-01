@@ -1245,6 +1245,7 @@ script = ExtResource("7_dadwo")
 
 [node name="HitBoxComponent" type="Area3D" parent="."]
 collision_layer = 4
+collision_mask = 4
 script = ExtResource("8_g4ydo")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitBoxComponent"]

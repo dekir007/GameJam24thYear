@@ -6,10 +6,10 @@ var stolen_gift_count : int = 0
 var score : int = 0 :
 	set(val):
 		score = val
-		if score > 0 and score % 200 == 0:
+		if score > 0 and score % 400 == 0:
 			get_tree().get_first_node_in_group("player").damage.damage += 1
-			if score % 400 == 0:
-				get_tree().get_first_node_in_group("player").health_component.heal(50)
+			#if score % 400 == 0:
+			get_tree().get_first_node_in_group("player").health_component.heal(25)
 
 var menu_theme_sound = preload("res://assets/sounds/Snowland Loop.wav")
 var menu_theme_player : AudioStreamPlayer
@@ -36,4 +36,5 @@ func game_over():
 	gameover_event.action = "game_over"
 	gameover_event.pressed = true
 	Input.parse_input_event(gameover_event)
+
 

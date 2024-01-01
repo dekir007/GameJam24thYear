@@ -19,6 +19,7 @@ func _on_area_entered(area: Area3D) -> void:
 		return
 	# TODO
 	get_hit(attack_node.damage)
+	attack_node.delete()
 	#area.queue_free()
 
 func get_hit(damage : Damage):
@@ -28,6 +29,7 @@ func get_hit(damage : Damage):
 	var d = damage.damage * clamp(1 - defense.defense + damage.penetration, 0, 1) # мда, тавтология вышла
 	
 	hit.emit(HitContext.new(d))
+	
 	await get_tree().create_timer(0.1).timeout
 	set_deferred("monitoring", true)
 

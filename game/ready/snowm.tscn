@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://b6kp7upsjlfyd"]
+
+[ext_resource type="PackedScene" uid="uid://bryur270fswkk" path="res://assets/snowm.glb" id="1_kd5jx"]
+[ext_resource type="Material" uid="uid://dl3oe85t8dho0" path="res://assets/ded.tres" id="2_4gt8e"]
+
+[node name="snowm" instance=ExtResource("1_kd5jx")]
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/2/rotation = Quaternion(1, 1.07289e-21, 7.54979e-08, 1.42109e-14)
+bones/6/rotation = Quaternion(3.32969e-08, -8.32031e-08, 0.153012, 0.988224)
+bones/8/rotation = Quaternion(3.32969e-08, 8.32031e-08, -0.153012, 0.988224)
+
+[node name="Cube_008" parent="Armature/Skeleton3D" index="0"]
+surface_material_override/0 = ExtResource("2_4gt8e")
+
+[node name="Plane_004" parent="Armature/Skeleton3D" index="1"]
+surface_material_override/0 = ExtResource("2_4gt8e")
