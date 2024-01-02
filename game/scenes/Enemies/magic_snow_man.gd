@@ -15,6 +15,7 @@ extends CharacterBody3D
 @onready var audio_put: AudioStreamPlayer = $AudioPut
 @onready var progress_bar:  = $OverHead/ProgressBar as ProgressBar3D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var frost_ray:  = $magic/magic/Skeleton3D/Plane_012/FrostRay as FrostRay
 
 const ICICLE = preload("res://scenes/objects/icicle.tscn")
 
@@ -24,12 +25,14 @@ var dashing = false
 var is_player_in_range : bool = false
 
 func _ready() -> void:
-	animation_player.play("bad walk")
+	animation_player.play("magic walk")
 	#grab_gift()
 	if damage == null:
 		damage = Damage.new()
 		damage.damage = 5
 	target = get_tree().get_first_node_in_group("player")#get_tree().get_nodes_in_group("gift").reduce(func(accum : Node3D, node : Node3D): return node if node.global_position.distance_to(global_position) < accum.global_position.distance_to(global_position) else accum)
+	frost_ray.target = target
+	frost_ray.damage = damage
 
 func _physics_process(delta: float) -> void:
 	#if target == null:
@@ -48,16 +51,19 @@ func _physics_process(delta: float) -> void:
 	#velocity = velocity.move_toward(vel, vel.length_squared()/30)
 	var dist = global_position.distance_to(target_global_position) 
 	#print(self, dist)
-	if dist > 6 and dist < 7:
+	if dist > 8 and dist < 9:
+		frost_ray.is_casting = false
 		dash()
-	elif dist < 2:
-		pass
+	elif dist <= 7.5:
+		frost_ray.is_casting = true
+	else:
+		frost_ray.is_casting = false
 	
 	look_at(target_global_position)
 
 func dash():
 	if can_dash:
-		velocity *= 4
+		velocity *= 2
 		dashing = true
 		can_dash = false
 		await get_tree().create_timer(.3).timeout
@@ -67,8 +73,8 @@ func dash():
 
 func _on_health_component_died() -> void:
 	death_spawner_component.spawn(global_position, get_parent())
-	Globals.score += 100
-	var num = randi_range(6, 12)
+	Globals.score += 200
+	var num = randi_range(24, 32)
 	for i in range(num):
 		var a = PI * i * (2. / num)
 		var dir = Vector3.FORWARD.rotated(Vector3.UP, a)
@@ -76,7 +82,7 @@ func _on_health_component_died() -> void:
 		icicle.dir = dir #global_position.direction_to(get_tree().get_first_node_in_group("player").global_position)
 		icicle.speed = 10
 		icicle.damage = Damage.new()
-		icicle.damage.damage = randi_range(5, 15)
+		icicle.damage.damage = randi_range(10, 15)
 		get_parent().add_child(icicle)
 		icicle.global_position = global_position
 	
@@ -97,8 +103,7 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity: Vector3) -> void:
 func _on_navigation_agent_3d_target_reached() -> void:
 	if target != null:
 		print("boss reached ded")
-		animation_player.play("bad attack")
-
+		animation_player.play("magic attack")
 
 func _on_health_component_health_changed(upd: HealthUpdate) -> void:
 	progress_bar.value = float(upd.cur_hp) / upd.max_hp 
@@ -110,10 +115,5 @@ func hit():
 
 func _on_animation_player_animation_finished(_anim_name: StringName) -> void:
 	if !animation_player.is_playing():
-		animation_player.play("bad walk")
+		animation_player.play("magic walk")
 
-func _on_check_player_body_entered(_body: Node3D) -> void:
-	is_player_in_range = true
-
-func _on_check_player_body_exited(_body: Node3D) -> void:
-	is_player_in_range = false

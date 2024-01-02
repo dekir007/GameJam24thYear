@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bbfn02d86am50"]
+[gd_scene load_steps=24 format=3 uid="uid://bbfn02d86am50"]
 
 [ext_resource type="Texture2D" uid="uid://c0xob482vgfb8" path="res://assets/noise.png" id="1_haccv"]
 [ext_resource type="Script" path="res://scenes/levels/arena.gd" id="1_u3e63"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://bgehfpwlaunvl" path="res://scenes/components/spawner_component.tscn" id="12_jtnkr"]
 [ext_resource type="PackedScene" uid="uid://d4beuuagle5ei" path="res://scenes/Enemies/snow_man.tscn" id="13_hwb8b"]
 [ext_resource type="AudioStream" uid="uid://c3cti7hhkrebw" path="res://assets/sounds/game song.mp3" id="15_2aa2e"]
+[ext_resource type="PackedScene" uid="uid://cna5e1egphtc7" path="res://scenes/Enemies/magic_snow_man.tscn" id="17_kkj6p"]
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_jjoyp"]
 dof_blur_far_distance = 28.17
@@ -482,7 +483,11 @@ volume_db = -8.0
 autoplay = true
 
 [node name="BossTimer" type="Timer" parent="."]
+wait_time = 30.0
 autostart = true
+
+[node name="MagicSnowMan" parent="." instance=ExtResource("17_kkj6p")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -15.9852, 0.020135, -10.7401)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="BossTimer" to="." method="_on_boss_timer_timeout"]

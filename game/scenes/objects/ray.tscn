@@ -41,7 +41,7 @@ mesh = SubResource("CylinderMesh_ctvvu")
 
 [node name="RayCast3D" type="RayCast3D" parent="Ray"]
 target_position = Vector3(0, 0, -1)
-collision_mask = 4
+collision_mask = 5
 collide_with_areas = true
 collide_with_bodies = false
 
@@ -63,3 +63,9 @@ lifetime = 0.1
 visibility_aabb = AABB(-0.88744, -1.04817, -0.92596, 1.77488, 2.09634, 1.85192)
 process_material = SubResource("ParticleProcessMaterial_i46fx")
 draw_pass_1 = SubResource("SphereMesh_8w244")
+
+[node name="CooldownTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]
