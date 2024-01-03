@@ -6,10 +6,8 @@ var stolen_gift_count : int = 0
 var score : int = 0 :
 	set(val):
 		score = val
-		if score > 0 and score % 400 == 0:
-			get_tree().get_first_node_in_group("player").damage.damage += 1
-			#if score % 400 == 0:
-			get_tree().get_first_node_in_group("player").health_component.heal(25)
+
+var money : int = 0
 
 var menu_theme_sound = preload("res://assets/sounds/Snowland Loop.wav")
 var menu_theme_player : AudioStreamPlayer
@@ -17,6 +15,7 @@ var menu_theme_player : AudioStreamPlayer
 func _ready() -> void:
 	menu_theme_player = AudioStreamPlayer.new()
 	menu_theme_player.stream = menu_theme_sound
+	menu_theme_player.bus = "Music"
 	add_child(menu_theme_player)
 
 func start_playing():

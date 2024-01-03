@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://cna5e1egphtc7"]
+[gd_scene load_steps=37 format=3 uid="uid://cna5e1egphtc7"]
 
 [ext_resource type="Script" path="res://scenes/Enemies/magic_snow_man.gd" id="1_gq5s6"]
 [ext_resource type="Script" path="res://scripts/Damage.gd" id="2_ps14k"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://d3recwm5ur062" path="res://scenes/components/health_component.tscn" id="6_obfwx"]
 [ext_resource type="PackedScene" uid="uid://cfftep6odpudu" path="res://scenes/objects/progress_bar.tscn" id="7_1lxuc"]
 [ext_resource type="PackedScene" uid="uid://ccumghcbbaw4a" path="res://scenes/components/hit_box_component.tscn" id="8_rdhp8"]
+[ext_resource type="Script" path="res://scripts/Defense.gd" id="9_m5ffq"]
 [ext_resource type="PackedScene" uid="uid://yyi4nmski8oe" path="res://scenes/blizzard.tscn" id="9_s0d8e"]
 [ext_resource type="PackedScene" uid="uid://ckhyl87e8uuc6" path="res://ready/gift.tscn" id="10_5k1ps"]
 [ext_resource type="PackedScene" uid="uid://b2n1hle03tsbg" path="res://scenes/objects/ray.tscn" id="11_rgis5"]
@@ -15,12 +16,16 @@
 
 [sub_resource type="Resource" id="Resource_2phrd"]
 script = ExtResource("2_ps14k")
-damage = 5
-penetration = 0.2
+damage = 3.5
+penetration = 0.4
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uph77"]
 radius = 0.303946
 height = 1.19218
+
+[sub_resource type="Resource" id="Resource_6dtby"]
+script = ExtResource("9_m5ffq")
+defense = 0.5
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ym7gj"]
 radius = 0.413557
@@ -1112,11 +1117,15 @@ _data = {
 "walk": SubResource("Animation_cm4cr")
 }
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_c2y1a"]
+radius = 4.22544
+
 [node name="MagicSnowMan" type="CharacterBody3D"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
-collision_layer = 4
+collision_layer = 2
 collision_mask = 7
 script = ExtResource("1_gq5s6")
+speed = 275.0
 damage = SubResource("Resource_2phrd")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -1130,13 +1139,13 @@ scene = ExtResource("4_8axiy")
 scene = ExtResource("5_p1345")
 
 [node name="HealthComponent" parent="." instance=ExtResource("6_obfwx")]
-max_health = 50
+max_health = 50.0
 
 [node name="OverHead" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.955, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.70128, 0)
 
 [node name="ProgressBar" parent="OverHead" instance=ExtResource("7_1lxuc")]
-size = Vector3(2, 0.2, 0.1)
+size = Vector3(1.5, 0.15, 0.1)
 
 [node name="GiftPos" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.507198, -0.694776)
@@ -1145,13 +1154,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.507198, -0.694776)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0359312, 0.314562, -0.0740833)
 collision_layer = 2
 collision_mask = 3
+defense = SubResource("Resource_6dtby")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitBoxComponent"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.472336, 0)
 shape = SubResource("CapsuleShape3D_ym7gj")
 
 [node name="Blizzard" parent="." instance=ExtResource("9_s0d8e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3165, 0)
 emitting = false
+amount = 128
+visibility_aabb = AABB(-3.27568, -2.02531, -3.0616, 6.55137, 4.05063, 6.12321)
 
 [node name="GiftSpawnerComponent" parent="." instance=ExtResource("3_acxxx")]
 scene = ExtResource("10_5k1ps")
@@ -1304,9 +1317,19 @@ libraries = {
 "": SubResource("AnimationLibrary_2i4eb")
 }
 
+[node name="SpeedArea3D" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SpeedArea3D"]
+shape = SubResource("SphereShape3D_c2y1a")
+
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
 [connection signal="health_changed" from="HealthComponent" to="." method="_on_health_component_health_changed"]
 [connection signal="hit" from="HitBoxComponent" to="." method="_on_hit_box_component_hit"]
 [connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]
 [connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="body_entered" from="SpeedArea3D" to="." method="_on_speed_area_3d_body_entered"]
+[connection signal="body_exited" from="SpeedArea3D" to="." method="_on_speed_area_3d_body_exited"]

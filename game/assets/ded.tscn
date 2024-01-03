@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://bg8631sd3swlm"]
+[gd_scene load_steps=34 format=3 uid="uid://bg8631sd3swlm"]
 
 [ext_resource type="Script" path="res://assets/ded.gd" id="1_q4un2"]
 [ext_resource type="Material" uid="uid://dl3oe85t8dho0" path="res://assets/ded.tres" id="2_cj3ts"]
@@ -9,15 +9,17 @@
 [ext_resource type="AudioStream" uid="uid://u4kwbcm6ery2" path="res://assets/sounds/Gun Paintball Shot 8 - QuickSounds.com.mp3" id="6_dl6l2"]
 [ext_resource type="Script" path="res://scenes/components/HealthComponent.gd" id="7_dadwo"]
 [ext_resource type="Script" path="res://scenes/components/hit_box_component.gd" id="8_g4ydo"]
+[ext_resource type="Script" path="res://scripts/Defense.gd" id="10_f8rpi"]
 [ext_resource type="AudioStream" uid="uid://bwe6quduakpkw" path="res://assets/sounds/hit sounds/hit1.ogg" id="10_phaq0"]
 [ext_resource type="AudioStream" uid="uid://1bm7uut4yoye" path="res://assets/sounds/hit sounds/hit2.ogg" id="11_rrqqx"]
 [ext_resource type="AudioStream" uid="uid://cej2waajme1ws" path="res://assets/sounds/hit sounds/hit3.ogg" id="12_pclbs"]
 [ext_resource type="AudioStream" uid="uid://bbcn5500k4yyr" path="res://assets/sounds/hit sounds/hit4.ogg" id="13_qy7gl"]
 [ext_resource type="AudioStream" uid="uid://dgvj2s4naplv7" path="res://assets/sounds/hit sounds/hit5.ogg" id="14_dcgdi"]
+[ext_resource type="PackedScene" uid="uid://c34cc3hoyt8sc" path="res://scenes/floating_text_3d.tscn" id="16_uevcb"]
 
 [sub_resource type="Resource" id="Resource_4xn3o"]
 script = ExtResource("2_tnrjv")
-damage = 2
+damage = 2.0
 penetration = 0.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fawkt"]
@@ -917,14 +919,17 @@ _data = {
 "walk111": SubResource("Animation_ju5vn")
 }
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cwv3c"]
-radius = 1.49961
-height = 5.91009
+[sub_resource type="BoxShape3D" id="BoxShape3D_kt7ag"]
+size = Vector3(2.70416, 12.989, 2.8645)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3e7mg"]
 albedo_color = Color(0.345098, 0.615686, 0.0196078, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_4p45y"]
+
+[sub_resource type="Resource" id="Resource_e5twt"]
+script = ExtResource("10_f8rpi")
+defense = 0.1
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gecg1"]
 size = Vector3(4, 7, 4)
@@ -1203,8 +1208,8 @@ libraries = {
 autoplay = "idle"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.90509, 0.0340009)
-shape = SubResource("CapsuleShape3D_cwv3c")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.173431, 6.67719, 0.28217)
+shape = SubResource("BoxShape3D_kt7ag")
 
 [node name="Hud" parent="." instance=ExtResource("3_cdqsf")]
 
@@ -1235,6 +1240,7 @@ height = 2.0
 stream = ExtResource("6_dl6l2")
 volume_db = -8.0
 pitch_scale = 3.0
+bus = &"SoundFx"
 
 [node name="ShootTimer" type="Timer" parent="."]
 wait_time = 0.15
@@ -1247,6 +1253,7 @@ script = ExtResource("7_dadwo")
 collision_layer = 4
 collision_mask = 4
 script = ExtResource("8_g4ydo")
+defense = SubResource("Resource_e5twt")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitBoxComponent"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.19535, 0)
@@ -1255,6 +1262,13 @@ shape = SubResource("BoxShape3D_gecg1")
 [node name="HitSound" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_yhdsl")
 volume_db = 6.0
+bus = &"SoundFx"
+
+[node name="OverHead" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.86965, 0)
+
+[node name="DamageLabelSpawnerComponent" parent="." instance=ExtResource("4_1w46f")]
+scene = ExtResource("16_uevcb")
 
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]

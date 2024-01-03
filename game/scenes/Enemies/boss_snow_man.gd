@@ -11,8 +11,6 @@ extends CharacterBody3D
 @onready var gift_pos: Marker3D = $GiftPos
 @onready var gift_spawner_component: = $GiftSpawnerComponent as SpawnerComponent
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
-@onready var audio_grabbed: AudioStreamPlayer = $AudioGrabbed
-@onready var audio_put: AudioStreamPlayer = $AudioPut
 @onready var progress_bar:  = $OverHead/ProgressBar as ProgressBar3D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
@@ -67,7 +65,7 @@ func dash():
 
 func _on_health_component_died() -> void:
 	death_spawner_component.spawn(global_position, get_parent())
-	Globals.score += 100
+	Globals.score += 20
 	var num = randi_range(6, 12)
 	for i in range(num):
 		var a = PI * i * (2. / num)
@@ -76,7 +74,7 @@ func _on_health_component_died() -> void:
 		icicle.dir = dir #global_position.direction_to(get_tree().get_first_node_in_group("player").global_position)
 		icicle.speed = 10
 		icicle.damage = Damage.new()
-		icicle.damage.damage = randi_range(5, 15)
+		icicle.damage.damage = randi_range(4, 7)
 		get_parent().add_child(icicle)
 		icicle.global_position = global_position
 	
@@ -88,7 +86,7 @@ func _on_hit_box_component_hit(hit_context: HitBoxComponent.HitContext) -> void:
 	damage_label_spawner_component.spawn(over_head.global_position, get_parent(), {"amount" : hit_context.damage})
 
 func _on_navigation_agent_3d_velocity_computed(safe_velocity: Vector3) -> void:
-	var vel_max = Vector3(30,0,30) # снеговики могут улететь в стратосферу, когда сверху перса
+	var vel_max = Vector3(20,0,20) # снеговики могут улететь в стратосферу, когда сверху перса
 	if !dashing:
 		velocity = clamp(lerp(velocity, safe_velocity, get_process_delta_time() * 20), -vel_max, vel_max)
 	move_and_slide()
@@ -96,7 +94,6 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity: Vector3) -> void:
 
 func _on_navigation_agent_3d_target_reached() -> void:
 	if target != null:
-		print("boss reached ded")
 		animation_player.play("bad attack")
 
 

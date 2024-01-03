@@ -55,7 +55,7 @@ func _physics_process(delta: float) -> void:
 
 func dash():
 	if can_dash:
-		velocity *= 4
+		velocity *= 3
 		dashing = true
 		can_dash = false
 		await get_tree().create_timer(.3).timeout
@@ -84,6 +84,9 @@ func put_gift():
 	#print("put; stolen: ", Globals.stolen_gift_count, "; ", Globals.gift_count)
 	if Globals.gift_count == 0:
 		Globals.game_over()
+	
+	death_spawner_component.spawn(global_position, get_parent())
+	queue_free()
 
 func get_data(health:int):
 	health_component.max_health = health
@@ -114,7 +117,6 @@ func _on_health_component_died() -> void:
 		get_parent().add_child(icicle)
 		icicle.global_position = global_position
 	
-	
 	queue_free()
 
 func _on_hit_box_component_hit(hit_context: HitBoxComponent.HitContext) -> void:
@@ -122,8 +124,9 @@ func _on_hit_box_component_hit(hit_context: HitBoxComponent.HitContext) -> void:
 	damage_label_spawner_component.spawn(over_head.global_position, get_parent(), {"amount" : hit_context.damage})
 
 func _on_navigation_agent_3d_velocity_computed(safe_velocity: Vector3) -> void:
-	var vel_max = Vector3(30,0,30) # снеговики могут улететь в стратосферу, когда сверху перса
-	velocity = clamp(lerp(velocity, safe_velocity, get_process_delta_time() * 10), -vel_max, vel_max)
+	var vel_max = Vector3(20,0,20) # снеговики могут улететь в стратосферу, когда сверху перса
+	if !dashing:
+		velocity = clamp(lerp(velocity, safe_velocity, get_process_delta_time() * 20), -vel_max, vel_max)
 	move_and_slide()
 
 func _on_navigation_agent_3d_target_reached() -> void:
@@ -132,20 +135,9 @@ func _on_navigation_agent_3d_target_reached() -> void:
 			grab_gift()
 		elif target.is_in_group("escape_points"):
 			put_gift()
-		#else:
-			##print("reached ded")
-			#if !animation_player.is_playing():
-				#animation_player.play("attack")
-
 
 func _on_health_component_health_changed(upd: HealthUpdate) -> void:
 	progress_bar.value = float(upd.cur_hp) / upd.max_hp 
-
-func hit():
-	if $CheckPlayer.has_overlapping_bodies() and target.is_in_group("player"):
-		# TODO with hit box
-		target.hit_box_component.get_hit(damage)
-
 
 # TODO have no idea if it will work...
 func _on_tree_exiting() -> void:

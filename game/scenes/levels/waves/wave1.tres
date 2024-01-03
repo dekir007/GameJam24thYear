@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Wave" load_steps=2 format=3 uid="uid://cfjj6svub8qf2"]
+
+[ext_resource type="Script" path="res://scripts/Wave.gd" id="1_iot6p"]
+
+[resource]
+script = ExtResource("1_iot6p")
+global_time = 75.0
+thiefs = 6.0
+bads = 20.0
+boss = 50.0
+mage = 0.0

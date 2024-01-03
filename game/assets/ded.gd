@@ -1,5 +1,5 @@
 extends CharacterBody3D
-
+class_name Ded
 
 @export var SPEED : = 500.0
 @export var damage : Damage #= Damage.new(5,0)
@@ -15,10 +15,12 @@ const JUMP_VELOCITY = 4.5
 @onready var shoot_timer: Timer = $ShootTimer
 @onready var hud: CanvasLayer = $Hud
 @onready var hit_sound: AudioStreamPlayer = $HitSound
+@onready var over_head: Marker3D = $OverHead
 
 @onready var spawner_component:  = $SpawnerComponent as SpawnerComponent
 @onready var health_component: = $HealthComponent as HealthComponent
-@onready var hit_box_component: HitBoxComponent = $HitBoxComponent
+@onready var hit_box_component:  = $HitBoxComponent as HitBoxComponent
+@onready var damage_label_spawner_component:  = $DamageLabelSpawnerComponent as SpawnerComponent
 
 
 var can_shoot : bool = true
@@ -44,23 +46,27 @@ func _physics_process(delta: float) -> void:
 		#velocity.y = JUMP_VELOCITY
 
 #region Velocity Calculation
-	var move_direction = Vector3()
-	var camera_basis = camera.get_global_transform().basis
-	if Input.is_action_pressed("move_up"):
-		move_direction -= camera_basis.z
-	elif Input.is_action_pressed("move_down"):
-		move_direction += camera_basis.z
-	if Input.is_action_pressed("move_left"):
-		move_direction -= camera_basis.x
-	elif Input.is_action_pressed("move_right"):
-		move_direction += camera_basis.x
-	move_direction.y = 0
+	if !dashing:
+		var move_direction = Vector3()
+		var camera_basis = camera.get_global_transform().basis
+		if Input.is_action_pressed("move_up"):
+			move_direction -= camera_basis.z
+		elif Input.is_action_pressed("move_down"):
+			move_direction += camera_basis.z
+		if Input.is_action_pressed("move_left"):
+			move_direction -= camera_basis.x
+		elif Input.is_action_pressed("move_right"):
+			move_direction += camera_basis.x
+		move_direction.y = 0
+		
+		var max_vel = Vector3(1,0,1) * 30
+		var vel = move_direction.normalized()*SPEED*delta
+		velocity = clamp((velocity.move_toward(vel, get_process_delta_time()*200)), -max_vel, max_vel)
 	
-	var max_vel = Vector3(1,0,1) * 30
-	velocity = clamp(move_direction.normalized()*SPEED*delta, -max_vel, max_vel)
-	
-	if Input.is_action_pressed("shift"):
-		velocity *= 1.5
+	if Input.is_action_just_pressed("shift"):
+		SPEED *= 1.5
+	if Input.is_action_just_released("shift"):
+		SPEED /= 1.5
 #endregion
 	
 	if Input.is_action_pressed("click"):
@@ -79,7 +85,7 @@ func dash():
 	if can_dash:
 		#var tw = get_tree().create_tween()
 		#tw.tween_property(self, "SPEED", 500, .3).from(2500).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUART)
-		SPEED *= 5
+		velocity *= 5
 		dashing = true
 		can_dash = false
 		var tw = get_tree().create_tween()
@@ -87,7 +93,7 @@ func dash():
 		tw.play()
 		await get_tree().create_timer(.2).timeout
 		dashing = false
-		SPEED /= 5
+		velocity /= 5
 		tw = get_tree().create_tween()
 		tw.tween_property(hud.dash_progress_bar, "value", 100, 1.7).from(0)
 		tw.play()
@@ -142,10 +148,29 @@ func _on_hit_box_component_hit(hit_context: HitBoxComponent.HitContext) -> void:
 	health_component.apply_damage(hit_context.damage)
 	hud.show_red()
 	hit_sound.play()
+	damage_label_spawner_component.spawn(over_head.global_position, get_parent(), {"amount" : hit_context.damage})
 
 func _on_health_component_health_changed(upd: HealthUpdate) -> void:
-	hud.texture_progress_bar.value = float(upd.cur_hp)/upd.max_hp * 100
+	hud.health_bar.value = float(upd.cur_hp)/upd.max_hp * 100
 	hud.health_orb_bar.value = float(upd.cur_hp)/upd.max_hp * 100
 
 func _on_health_component_died() -> void:
 	Globals.game_over()
+
+func upgrade_speed():
+	SPEED += 50
+	print("speed ", SPEED)
+
+func upgrade_damage():
+	damage.damage += 1
+	damage.penetration += .15
+	print("damage ", damage.damage)
+
+func upgrade_defense():
+	hit_box_component.defense.defense += 0.15
+	print("defense ", hit_box_component.defense.defense)
+
+func upgrade_max_health():
+	health_component.max_health += 25
+	health_component.heal(25)
+	print("max_health ", health_component.max_health)

@@ -11,8 +11,6 @@ extends CharacterBody3D
 @onready var gift_pos: Marker3D = $GiftPos
 @onready var gift_spawner_component: = $GiftSpawnerComponent as SpawnerComponent
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
-@onready var audio_grabbed: AudioStreamPlayer = $AudioGrabbed
-@onready var audio_put: AudioStreamPlayer = $AudioPut
 @onready var progress_bar:  = $OverHead/ProgressBar as ProgressBar3D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var frost_ray:  = $magic/magic/Skeleton3D/Plane_012/FrostRay as FrostRay
@@ -51,7 +49,7 @@ func _physics_process(delta: float) -> void:
 	#velocity = velocity.move_toward(vel, vel.length_squared()/30)
 	var dist = global_position.distance_to(target_global_position) 
 	#print(self, dist)
-	if dist > 8 and dist < 9:
+	if dist > 9 and dist < 10:
 		frost_ray.is_casting = false
 		dash()
 	elif dist <= 7.5:
@@ -73,7 +71,7 @@ func dash():
 
 func _on_health_component_died() -> void:
 	death_spawner_component.spawn(global_position, get_parent())
-	Globals.score += 200
+	Globals.score += 300
 	var num = randi_range(24, 32)
 	for i in range(num):
 		var a = PI * i * (2. / num)
@@ -94,7 +92,7 @@ func _on_hit_box_component_hit(hit_context: HitBoxComponent.HitContext) -> void:
 	damage_label_spawner_component.spawn(over_head.global_position, get_parent(), {"amount" : hit_context.damage})
 
 func _on_navigation_agent_3d_velocity_computed(safe_velocity: Vector3) -> void:
-	var vel_max = Vector3(30,0,30) # снеговики могут улететь в стратосферу, когда сверху перса
+	var vel_max = Vector3(20,0,20) # снеговики могут улететь в стратосферу, когда сверху перса
 	if !dashing:
 		velocity = clamp(lerp(velocity, safe_velocity, get_process_delta_time() * 20), -vel_max, vel_max)
 	move_and_slide()
@@ -102,7 +100,6 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity: Vector3) -> void:
 
 func _on_navigation_agent_3d_target_reached() -> void:
 	if target != null:
-		print("boss reached ded")
 		animation_player.play("magic attack")
 
 func _on_health_component_health_changed(upd: HealthUpdate) -> void:
@@ -117,3 +114,13 @@ func _on_animation_player_animation_finished(_anim_name: StringName) -> void:
 	if !animation_player.is_playing():
 		animation_player.play("magic walk")
 
+
+
+func _on_speed_area_3d_body_entered(body: Node3D) -> void:
+	if "speed" in body:
+		body.speed *= 1.5
+
+
+func _on_speed_area_3d_body_exited(body: Node3D) -> void:
+	if "speed" in body:
+		body.speed /= 1.5

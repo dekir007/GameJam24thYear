@@ -1,0 +1,112 @@
+[gd_scene load_steps=9 format=3 uid="uid://bsqhovcusvbr7"]
+
+[ext_resource type="Script" path="res://scenes/ui/upgrade_option.gd" id="1_62hm8"]
+[ext_resource type="Texture2D" uid="uid://dmirtmyg5nng8" path="res://assets/images/agility icon.png" id="1_rmyll"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yksd1"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.729412, 0.996078, 0, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="LabelSettings" id="LabelSettings_lhbou"]
+font_size = 32
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q04rt"]
+content_margin_left = 25.0
+content_margin_top = 15.0
+content_margin_right = 25.0
+content_margin_bottom = 15.0
+bg_color = Color(0.94902, 0.94902, 0.94902, 1)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.823529, 0.196078, 0, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3i73e"]
+content_margin_left = 25.0
+content_margin_top = 15.0
+content_margin_right = 25.0
+content_margin_bottom = 15.0
+bg_color = Color(0.52549, 0.52549, 0.52549, 1)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.823529, 0.196078, 0, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c82ms"]
+content_margin_left = 25.0
+content_margin_top = 15.0
+content_margin_right = 25.0
+content_margin_bottom = 15.0
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.823529, 0.196078, 0, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b1jv3"]
+
+[node name="UpgradeOption" type="VBoxContainer"]
+theme_override_constants/separation = 15
+script = ExtResource("1_62hm8")
+
+[node name="IconImage" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_rmyll")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="Title" type="Label" parent="."]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_yksd1")
+text = "Скорость"
+label_settings = SubResource("LabelSettings_lhbou")
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Description" type="Label" parent="."]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_vertical = 6
+text = "Увеличивает скорость  персонажа"
+label_settings = SubResource("LabelSettings_lhbou")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 42
+theme_override_styles/normal = SubResource("StyleBoxFlat_q04rt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3i73e")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_c82ms")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_b1jv3")
+text = "Select"
+
+[connection signal="button_up" from="Button" to="." method="_on_button_button_up"]

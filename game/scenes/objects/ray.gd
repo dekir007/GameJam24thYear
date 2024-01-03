@@ -18,7 +18,7 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	var dist
-	if ray_cast.is_colliding():
+	if is_casting and ray_cast.is_colliding():
 		gpu_particles.emitting = true
 		dist = global_position.distance_to(ray_cast.get_collision_point())
 		if (ray_cast.get_collider() as Node).get_parent().is_in_group("player"):

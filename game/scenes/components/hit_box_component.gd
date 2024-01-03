@@ -26,8 +26,7 @@ func get_hit(damage : Damage):
 	set_deferred("monitoring", false)
 	#var d = (area.skill as Skill).attack(area.attacker, core)
 	
-	var d = damage.damage * clamp(1 - defense.defense + damage.penetration, 0, 1) # мда, тавтология вышла
-	
+	var d = snappedf(damage.damage * clamp(1 - defense.defense + damage.penetration, 0, 1), 0.01) # мда, тавтология вышла
 	hit.emit(HitContext.new(d))
 	
 	await get_tree().create_timer(0.1).timeout
@@ -35,9 +34,9 @@ func get_hit(damage : Damage):
 
 class HitContext extends RefCounted:
 	#var attacker : CoreComponent
-	var damage : int
+	var damage : float
 	
 	func _init(#_attacker: Node, 
-				_damage : int):
+				_damage : float):
 		#attacker = _attacker
 		damage = _damage

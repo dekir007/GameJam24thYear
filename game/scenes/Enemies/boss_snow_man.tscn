@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://dmwiwjcccolb3"]
+[gd_scene load_steps=32 format=3 uid="uid://dmwiwjcccolb3"]
 
 [ext_resource type="Script" path="res://scenes/Enemies/boss_snow_man.gd" id="1_ib5s5"]
 [ext_resource type="PackedScene" uid="uid://bgehfpwlaunvl" path="res://scenes/components/spawner_component.tscn" id="2_jq2kl"]
@@ -10,14 +10,19 @@
 [ext_resource type="PackedScene" uid="uid://ccumghcbbaw4a" path="res://scenes/components/hit_box_component.tscn" id="7_orubc"]
 [ext_resource type="PackedScene" uid="uid://yyi4nmski8oe" path="res://scenes/blizzard.tscn" id="8_jo7dy"]
 [ext_resource type="PackedScene" uid="uid://ckhyl87e8uuc6" path="res://ready/gift.tscn" id="9_bofne"]
+[ext_resource type="Script" path="res://scripts/Defense.gd" id="9_xphoo"]
 [ext_resource type="Material" uid="uid://dl3oe85t8dho0" path="res://assets/ded.tres" id="13_865qh"]
 
 [sub_resource type="Resource" id="Resource_atwgj"]
 script = ExtResource("2_sthgw")
-damage = 15
-penetration = 0.0
+damage = 15.0
+penetration = 0.3
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uph77"]
+
+[sub_resource type="Resource" id="Resource_e3kat"]
+script = ExtResource("9_xphoo")
+defense = 0.3
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ym7gj"]
 radius = 0.617416
@@ -1024,7 +1029,7 @@ _data = {
 
 [node name="BossSnowMan" type="CharacterBody3D"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
-collision_layer = 4
+collision_layer = 2
 collision_mask = 7
 script = ExtResource("1_ib5s5")
 damage = SubResource("Resource_atwgj")
@@ -1040,13 +1045,13 @@ scene = ExtResource("3_b8lkx")
 scene = ExtResource("4_8gaqh")
 
 [node name="HealthComponent" parent="." instance=ExtResource("5_opdxs")]
-max_health = 50
+max_health = 50.0
 
 [node name="OverHead" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.955, 0)
 
 [node name="ProgressBar" parent="OverHead" instance=ExtResource("6_jd1g4")]
-size = Vector3(2, 0.2, 0.1)
+size = Vector3(1.5, 0.15, 0.1)
 
 [node name="GiftPos" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.507198, -0.694776)
@@ -1055,6 +1060,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.507198, -0.694776)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.314562, -0.0740833)
 collision_layer = 2
 collision_mask = 3
+defense = SubResource("Resource_e3kat")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitBoxComponent"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.472336, 0)

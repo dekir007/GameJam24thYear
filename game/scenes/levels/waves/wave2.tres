@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Wave" load_steps=2 format=3 uid="uid://drv4nq7uqc5wy"]
+
+[ext_resource type="Script" path="res://scripts/Wave.gd" id="1_psmco"]
+
+[resource]
+script = ExtResource("1_psmco")
+global_time = 90.0
+thiefs = 5.0
+bads = 6.5
+boss = 30.0
+mage = 0.0

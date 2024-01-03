@@ -21,7 +21,7 @@ func init() -> void:
 			_bus_controls[bus_name] = []
 			continue
 		var slider:HSlider = _bus_controls[bus_name][1]
-		slider.value = AudioServer.get_bus_volume_db(bus_index)
+		slider.value = db_to_linear(AudioServer.get_bus_volume_db(bus_index))
 		if !slider.is_connected("value_changed",Callable(self,"_on_volume_slider_value_changed")):
 			if OK != slider.connect("value_changed",Callable(self,"_on_volume_slider_value_changed").bind(bus_index)):
 				printerr("VolumeSettingsUI: couldn't connect to volume slider value_changed signal!!")
@@ -41,7 +41,7 @@ func cancel() -> void:
 
 
 func _on_volume_slider_value_changed(value: float, bus_index: int) -> void:
-	AudioServer.set_bus_volume_db(bus_index, value)
+	AudioServer.set_bus_volume_db(bus_index, linear_to_db(value))
 	if !_update_volume_sound.playing:
 		_update_volume_sound.play()
 

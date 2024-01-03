@@ -761,7 +761,7 @@ _data = {
 }
 
 [node name="SnowMan" type="CharacterBody3D"]
-collision_layer = 4
+collision_layer = 2
 collision_mask = 7
 script = ExtResource("1_bs3mb")
 
@@ -776,7 +776,7 @@ scene = ExtResource("3_p2jkp")
 scene = ExtResource("4_hcixu")
 
 [node name="HealthComponent" parent="." instance=ExtResource("4_ta14i")]
-max_health = 10
+max_health = 10.0
 
 [node name="OverHead" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.93194, 0)
@@ -810,9 +810,11 @@ radius = 0.4
 
 [node name="AudioGrabbed" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_mvysl")
+bus = &"SoundFx"
 
 [node name="AudioPut" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_nhih7")
+bus = &"SoundFx"
 
 [node name="CheckPlayer" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.719335, -0.994517)

@@ -9,7 +9,7 @@ class_name SimpleBullet
 @onready var mesh: MeshInstance3D = $MeshInstance3D
 
 func _ready() -> void:
-	direction = -get_parent().get_global_transform().basis.z
+	direction = -get_parent().get_global_transform().basis.z.normalized()
 
 func _process(delta: float) -> void:
 	global_position += direction*speed*delta
