@@ -8,3 +8,10 @@ Esc - menu
 Goal:
 Snowmen attack and steal gifts prepared for little children! 
 Shoot 'em and save gifts!
+
+Squirrel will help you by making gifts each 35 seconds.
+
+After clearing each wave go to the center of the arena to 
+a deer to get your rewards!
+
+Advice: upgrade damage

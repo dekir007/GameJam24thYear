@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://bapx4te04bvdx"]
+
+[ext_resource type="PackedScene" uid="uid://cppmjy6arjrjm" path="res://assets/bad.glb" id="1_g4l0p"]
+[ext_resource type="Material" uid="uid://dl3oe85t8dho0" path="res://assets/ded.tres" id="2_mslvg"]
+
+[node name="bad" instance=ExtResource("1_g4l0p")]
+
+[node name="Skeleton3D" parent="bad_001" index="0"]
+bones/0/position = Vector3(1.64431, 0.0614423, -0.0773448)
+bones/2/position = Vector3(-3.09583e-07, 0.434001, -0.493098)
+bones/2/rotation = Quaternion(-0.559973, 3.58849e-07, 1.09031e-07, 0.828511)
+bones/4/rotation = Quaternion(-0.29027, -0.0243595, -0.0439617, 0.955624)
+bones/5/rotation = Quaternion(-0.603853, 0.000416994, 0.331794, 0.724758)
+bones/6/rotation = Quaternion(-0.0977197, -5.01351e-14, -2.32982e-08, 0.995214)
+bones/7/rotation = Quaternion(-0.131042, 4.03541e-15, -3.12429e-08, 0.991377)
+bones/8/rotation = Quaternion(-0.00225827, 2.85883e-15, -5.38413e-10, 0.999997)
+bones/9/rotation = Quaternion(0.00864657, 0.0413625, -0.686916, 0.725507)
+bones/10/rotation = Quaternion(-0.0530593, 0.00416039, 0.108086, 0.992716)
+bones/11/rotation = Quaternion(0.0086464, -0.0413627, 0.686916, 0.725507)
+bones/12/rotation = Quaternion(-0.0530593, -0.00416038, -0.108086, 0.992716)
+bones/14/rotation = Quaternion(-0.29027, 0.0243596, 0.0439617, 0.955624)
+bones/15/rotation = Quaternion(-0.603853, -0.000417069, -0.331794, 0.724758)
+bones/16/position = Vector3(-1.64431, 0.0614423, -0.0773448)
+
+[node name="bad" parent="bad_001/Skeleton3D" index="0"]
+surface_material_override/0 = ExtResource("2_mslvg")
+
+[node name="Plane_007" parent="bad_001/Skeleton3D" index="1"]
+surface_material_override/0 = ExtResource("2_mslvg")

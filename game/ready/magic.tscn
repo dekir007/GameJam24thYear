@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://dptbjydt0m7gj"]
+
+[ext_resource type="PackedScene" uid="uid://dfe2ko4c26p2c" path="res://assets/magic.glb" id="1_i02sp"]
+[ext_resource type="Material" uid="uid://dl3oe85t8dho0" path="res://assets/ded.tres" id="2_qffc5"]
+
+[node name="magic" instance=ExtResource("1_i02sp")]
+
+[node name="Skeleton3D" parent="magic" index="0"]
+bones/0/position = Vector3(0, -0.833211, 0)
+bones/1/rotation = Quaternion(0.0431367, 0, 0, 0.999069)
+bones/2/rotation = Quaternion(0.0578449, 0, 0, 0.998326)
+bones/3/rotation = Quaternion(0.00327442, -0.00213939, -0.856717, 0.515772)
+bones/4/rotation = Quaternion(5.2194e-08, -1.88326e-08, 0.211777, 0.977318)
+bones/5/rotation = Quaternion(0.00744766, -0.00113249, 0.066462, 0.997761)
+bones/6/rotation = Quaternion(-0.132315, 0.183343, -0.818678, 0.527867)
+bones/7/rotation = Quaternion(0.922034, -6.95136e-17, -6.30726e-17, -0.387108)
+bones/8/rotation = Quaternion(-0.168377, -1.15322e-07, 3.01926e-08, 0.985723)
+bones/9/rotation = Quaternion(0.264651, -3.63919e-09, -4.3606e-08, 0.964344)
+bones/10/rotation = Quaternion(-5.83516e-08, 5.891e-09, 0.83716, 0.546958)
+bones/11/rotation = Quaternion(0.00527506, -0.00106901, -0.162006, 0.986775)
+bones/12/rotation = Quaternion(0.00659383, 0.00100267, -0.0745873, 0.997192)
+bones/13/position = Vector3(-1.58819e-22, -0.178217, 1.59389e-08)
+bones/14/rotation = Quaternion(-0.301386, -0.639661, -0.639661, 0.301386)
+
+[node name="Circle_002" parent="magic/Skeleton3D" index="0"]
+surface_material_override/0 = ExtResource("2_qffc5")
+
+[node name="Cylinder_007" parent="magic/Skeleton3D" index="1"]
+surface_material_override/0 = ExtResource("2_qffc5")
+
+[node name="magic_001" parent="magic/Skeleton3D" index="2"]
+surface_material_override/0 = ExtResource("2_qffc5")
+
+[node name="Plane_012" parent="magic/Skeleton3D" index="3"]
+surface_material_override/0 = ExtResource("2_qffc5")

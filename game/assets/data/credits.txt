@@ -2,15 +2,19 @@ Art:
 "FREE Keyboard and controllers prompts pack" by xelu (https://opengameart.org/content/free-keyboard-and-controllers-prompts-pack) 
 licensed under CC0 1.0 (http://creativecommons.org/publicdomain/zero/1.0/)
 
-Escape Icon:
-by Truly Malicious
+Icons by Truly Malicious (https://twitter.com/trulymalicious)
+under license CC-BY 4.0 (https://creativecommons.org/licenses/by/4.0/)
 https://trulymalicious.itch.io/status-icon-set-1-free
 
 
-Sound:
+Sounds:
 bong_001.ogg from "Interface Sounds" by Kenney
 https://www.kenney.nl/assets/interface-sounds
 License: CC0 1.0 (http://creativecommons.org/publicdomain/zero/1.0/)
+
+levelup.wave from "LevelUp Sound Atmospheric" by copyc4t
+https://opengameart.org/content/levelup-sound-atmospheric
+License: CC0 BY 3.0 (https://creativecommons.org/licenses/by/3.0/)
 
 Music by Matthew Pablo
 http://www.matthewpablo.com

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="UpgradeOptionData" load_steps=3 format=3 uid="uid://d3ti0bi3vrmjp"]
+
+[ext_resource type="Texture2D" uid="uid://cm0fmdabyofy7" path="res://assets/images/buff icon.png" id="1_ew44v"]
+[ext_resource type="Script" path="res://scripts/UpgradeOptionData.gd" id="2_wrupo"]
+
+[resource]
+script = ExtResource("2_wrupo")
+icon = ExtResource("1_ew44v")
+title = "Reload"
+description = "Decrease character's reload time"
+price = 4
+level = 0
+max_level = 2

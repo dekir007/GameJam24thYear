@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="UpgradeOptionData" load_steps=3 format=3 uid="uid://bxai1togdlgjc"]
+
+[ext_resource type="Texture2D" uid="uid://dxvuxvqn86egk" path="res://assets/images/health icon.png" id="1_8uvgp"]
+[ext_resource type="Script" path="res://scripts/UpgradeOptionData.gd" id="2_tuj0i"]
+
+[resource]
+script = ExtResource("2_tuj0i")
+icon = ExtResource("1_8uvgp")
+title = "Max Health"
+description = "Increase character's max health "
+price = 2
+level = 0
+max_level = 4

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="UpgradeOptionData" load_steps=3 format=3 uid="uid://bwlwdhg4kmp7h"]
+
+[ext_resource type="Texture2D" uid="uid://dl7g1vxoqgt6x" path="res://assets/images/strength icon.png" id="1_fqfyq"]
+[ext_resource type="Script" path="res://scripts/UpgradeOptionData.gd" id="2_v676e"]
+
+[resource]
+script = ExtResource("2_v676e")
+icon = ExtResource("1_fqfyq")
+title = "Damage"
+description = "Increase character's damage"
+price = 6
+level = 0
+max_level = 2

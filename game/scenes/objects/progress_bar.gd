@@ -32,6 +32,8 @@ func _init():
 	under.material_override = StandardMaterial3D.new()
 	progress.material_override.params_billboard_keep_scale = true
 	under.material_override.params_billboard_keep_scale = true
+	progress.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	under.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	
 	outline_color_set(outline_color)
 	size_set(size)

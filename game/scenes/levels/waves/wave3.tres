@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Wave" load_steps=2 format=3 uid="uid://cf45cjfvar5mp"]
+
+[ext_resource type="Script" path="res://scripts/Wave.gd" id="1_juprd"]
+
+[resource]
+script = ExtResource("1_juprd")
+global_time = 60.0
+thiefs = 4.5
+bads = 8.0
+boss = 20.0
+mage = 35.0

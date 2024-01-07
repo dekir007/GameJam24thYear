@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="UpgradeOptionData" load_steps=3 format=3 uid="uid://c1fy3rjb3ha5f"]
+
+[ext_resource type="Script" path="res://scripts/UpgradeOptionData.gd" id="1_4woia"]
+[ext_resource type="Texture2D" uid="uid://bn7xedyklerp3" path="res://assets/images/escape icon.png" id="1_cibmh"]
+
+[resource]
+script = ExtResource("1_4woia")
+icon = ExtResource("1_cibmh")
+title = "Dash"
+description = "Decrease character's dash cooldown"
+price = 4
+level = 0
+max_level = 2

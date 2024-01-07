@@ -9,10 +9,10 @@ var velocity : Vector3
 func _ready() -> void:
 	label.text = str(amount)
 	
-	velocity = Vector3(randi()%6-2, 1.5, randi()%6-2)
+	velocity = Vector3(randi()%3-2, 1, randi()%3-2)
 	
 	var tween = create_tween()
-	tween.tween_property(label, "scale", Vector3.ONE, 0.2).from(Vector3(0.7,0.7,0.7)).set_ease(Tween.EASE_OUT)
+	tween.tween_property(label, "scale", Vector3.ONE * amount / 4, 0.2).from(Vector3(0.7,0.7,0.7)).set_ease(Tween.EASE_OUT)
 	tween.tween_property(label, "scale", Vector3(.1,.1,.1), 0.7).set_ease(Tween.EASE_OUT)
 	tween.play()
 	tween.finished.connect(queue_free)

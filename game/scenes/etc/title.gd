@@ -15,7 +15,6 @@ func _on_ExitBtn_pressed():
 	get_tree().quit()
 
 
-
 func _on_new_game_btn_button_down() -> void:
 	Globals.reset()
 	Globals.stop_playing()

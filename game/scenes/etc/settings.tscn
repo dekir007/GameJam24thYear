@@ -84,6 +84,7 @@ theme_override_font_sizes/font_size = 96
 text = "OK"
 script = ExtResource("7")
 saving_node = NodePath("../../../..")
+scene_to_load = "res://scenes/etc/title.tscn"
 
 [connection signal="help_message_changed" from="MarginContainer/VBoxContainer/SettingsUI" to="." method="_on_SettingsUI_help_message_changed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/ResetBtn" to="." method="_on_ResetBtn_pressed"]

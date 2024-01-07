@@ -16,7 +16,7 @@ func spawn(global_spawn_position: Vector3 = global_position, parent: Node = get_
 	if data != null:
 		instance.get_data(data)
 	# Add it as a child of the parent
-	parent.add_child(instance)
+	parent.add_child(instance)#call_deferred("add_child",instance)
 	# Update the global position of the instance.
 	# (This must be done after adding it as a child)
 	instance.global_position = global_spawn_position
