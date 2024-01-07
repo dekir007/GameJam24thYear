@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cv10gs58v05e2"
-path="res://.godot/imported/itsmars_orb_shadow.png-3fb18b7357ed666c8084f8f9dd9797f0.ctex"
+uid="uid://brljcb0804xg5"
+path="res://.godot/imported/candy icon.png-42e384c6cae5694304536777c11eb1c6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/health orb/itsmars_orb_shadow.png"
-dest_files=["res://.godot/imported/itsmars_orb_shadow.png-3fb18b7357ed666c8084f8f9dd9797f0.ctex"]
+source_file="res://assets/images/candy icon.png"
+dest_files=["res://.godot/imported/candy icon.png-42e384c6cae5694304536777c11eb1c6.ctex"]
 
 [params]
 

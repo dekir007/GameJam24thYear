@@ -29,6 +29,10 @@ func reset():
 	gift_count = 0
 	stolen_gift_count = 0
 	score = 0
+	money = 0
+	stolen_gift_count = 0 # TODO
+	#for upgrade : UpgradeOption in get_tree().get_first_node_in_group("player").hud.upgrades_options:
+	#	upgrade.data.level = 0
 
 func game_over():
 	var gameover_event = InputEventAction.new()

@@ -10,3 +10,4 @@ title = "Defense"
 description = "Increase character's defense"
 price = 6
 level = 0
+max_level = 2

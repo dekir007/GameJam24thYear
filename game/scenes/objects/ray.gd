@@ -13,10 +13,10 @@ signal hitting_player
 var is_casting : bool = false
 var can_damage : bool = true
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	look_at(target.global_position + Vector3.UP*.5)
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	var dist
 	if is_casting and ray_cast.is_colliding():
 		gpu_particles.emitting = true

@@ -10,10 +10,10 @@ config_version=5
 
 [application]
 
-config/name="GameJam24thYear"
+config/name="Grandpa Frost: The Battle For Gifts"
 run/main_scene="res://scenes/etc/title.tscn"
 config/features=PackedStringArray("4.2")
-config/icon="res://icon.png"
+config/icon="res://assets/images/santa hat.png"
 
 [autoload]
 
@@ -152,6 +152,10 @@ dash={
 3d_physics/layer_1="world"
 3d_physics/layer_2="enemy"
 3d_physics/layer_3="player"
+
+[navigation]
+
+3d/default_cell_height=0.3
 
 [rendering]
 

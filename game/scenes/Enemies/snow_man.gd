@@ -85,6 +85,10 @@ func put_gift():
 	if Globals.gift_count == 0:
 		Globals.game_over()
 	
+	speed = 0
+	animation_player.play("idle")
+	
+	await audio_put.finished
 	death_spawner_component.spawn(global_position, get_parent())
 	queue_free()
 

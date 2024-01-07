@@ -10,3 +10,4 @@ title = "Max Health"
 description = "Increase character's max health "
 price = 2
 level = 0
+max_level = 4

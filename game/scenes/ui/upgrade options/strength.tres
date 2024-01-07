@@ -10,3 +10,4 @@ title = "Damage"
 description = "Increase character's damage"
 price = 6
 level = 0
+max_level = 2

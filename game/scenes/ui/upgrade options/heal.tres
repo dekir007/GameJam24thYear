@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="UpgradeOptionData" load_steps=3 format=3 uid="uid://btkio5ph7xncb"]
+
+[ext_resource type="Texture2D" uid="uid://brljcb0804xg5" path="res://assets/images/candy icon.png" id="1_q1iai"]
+[ext_resource type="Script" path="res://scripts/UpgradeOptionData.gd" id="2_c3dnx"]
+
+[resource]
+script = ExtResource("2_c3dnx")
+icon = ExtResource("1_q1iai")
+title = "Heal"
+description = "Heal additional 25 HP"
+price = 1
+level = 0
+max_level = -1

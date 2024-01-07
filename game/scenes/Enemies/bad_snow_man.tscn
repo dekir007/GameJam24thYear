@@ -29,7 +29,7 @@ radius = 0.617416
 height = 2.27718
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_j6mg2"]
-size = Vector3(1.24536, 1, 1.22726)
+size = Vector3(1.24536, 1, 1.36851)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l34ec"]
 
@@ -1084,7 +1084,7 @@ collision_mask = 4
 monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CheckPlayer"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0150044, 0, -0.0656007)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0150044, 0, -0.136227)
 shape = SubResource("BoxShape3D_j6mg2")
 
 [node name="bad" type="Node3D" parent="."]

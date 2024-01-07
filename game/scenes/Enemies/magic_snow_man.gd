@@ -49,10 +49,10 @@ func _physics_process(delta: float) -> void:
 	#velocity = velocity.move_toward(vel, vel.length_squared()/30)
 	var dist = global_position.distance_to(target_global_position) 
 	#print(self, dist)
-	if dist > 9 and dist < 10:
+	if dist > 8 and dist < 9:
 		frost_ray.is_casting = false
 		dash()
-	elif dist <= 7.5:
+	elif dist <= 6.6:
 		frost_ray.is_casting = true
 	else:
 		frost_ray.is_casting = false
@@ -94,7 +94,7 @@ func _on_hit_box_component_hit(hit_context: HitBoxComponent.HitContext) -> void:
 func _on_navigation_agent_3d_velocity_computed(safe_velocity: Vector3) -> void:
 	var vel_max = Vector3(20,0,20) # снеговики могут улететь в стратосферу, когда сверху перса
 	if !dashing:
-		velocity = clamp(lerp(velocity, safe_velocity, get_process_delta_time() * 20), -vel_max, vel_max)
+		velocity = clamp(lerp(velocity, safe_velocity, get_process_delta_time() * 50), -vel_max, vel_max)
 	move_and_slide()
 
 

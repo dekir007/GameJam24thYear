@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c3wr18klpbcgc"
-path="res://.godot/imported/itsmars_scroll_lip.png-b7af0bdc9a289cc08b3d52249ecadee0.ctex"
+uid="uid://dutq2r6o7s38q"
+path="res://.godot/imported/santa hat.png-bbfcd0abeb7323dea372df68c11382e0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/health orb/itsmars_scroll_lip.png"
-dest_files=["res://.godot/imported/itsmars_scroll_lip.png-b7af0bdc9a289cc08b3d52249ecadee0.ctex"]
+source_file="res://assets/images/santa hat.png"
+dest_files=["res://.godot/imported/santa hat.png-bbfcd0abeb7323dea372df68c11382e0.ctex"]
 
 [params]
 

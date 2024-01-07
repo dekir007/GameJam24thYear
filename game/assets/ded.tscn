@@ -1219,7 +1219,7 @@ top_level = true
 
 [node name="Camera3D" type="Camera3D" parent="CameraRig"]
 transform = Transform3D(1, 0, 0, 0, 0.405142, 0.914254, 0, -0.914254, 0.405142, 0, 0, 0)
-fov = 35.0
+fov = 40.0
 
 [node name="Cursor" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.67324)
@@ -1230,7 +1230,7 @@ mesh = SubResource("SphereMesh_4p45y")
 scene = ExtResource("5_xcanw")
 
 [node name="Marker3D" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.18236, 3.07959, -4.9411)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.921697, 3.07959, -4.9411)
 
 [node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="."]
 radius = 0.5

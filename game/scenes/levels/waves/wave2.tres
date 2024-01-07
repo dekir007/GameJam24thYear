@@ -4,8 +4,8 @@
 
 [resource]
 script = ExtResource("1_psmco")
-global_time = 90.0
-thiefs = 5.0
-bads = 6.5
+global_time = 65.0
+thiefs = 6.0
+bads = 10.0
 boss = 30.0
 mage = 0.0

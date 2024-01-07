@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ckwt0o325xa5u"
-path="res://.godot/imported/itsmars_orb_back1.png-5a50618ce332204ca9c4f15b5843f20a.ctex"
+uid="uid://bhseyva7q33cc"
+path="res://.godot/imported/art1.png-8711945d17751a10ba7ae14266077176.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/health orb/itsmars_orb_back1.png"
-dest_files=["res://.godot/imported/itsmars_orb_back1.png-5a50618ce332204ca9c4f15b5843f20a.ctex"]
+source_file="res://assets/images/art1.png"
+dest_files=["res://.godot/imported/art1.png-8711945d17751a10ba7ae14266077176.ctex"]
 
 [params]
 

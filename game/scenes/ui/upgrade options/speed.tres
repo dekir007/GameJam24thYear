@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="UpgradeOptionData" load_steps=3 format=3 uid="uid://bjh62djfj01ym"]
+
+[ext_resource type="Texture2D" uid="uid://dmirtmyg5nng8" path="res://assets/images/agility icon.png" id="1_f0p37"]
+[ext_resource type="Script" path="res://scripts/UpgradeOptionData.gd" id="2_qonia"]
+
+[resource]
+script = ExtResource("2_qonia")
+icon = ExtResource("1_f0p37")
+title = "Speed"
+description = "Increase character's speed"
+price = 2
+level = 0
+max_level = 2

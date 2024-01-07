@@ -41,7 +41,7 @@ func _on_gift_timer_timeout() -> void:
 
 
 func _on_navigation_agent_3d_target_reached() -> void:
-	if target.get_child_count() == 0 and can_make_gift and Globals.gift_count < 8:
+	if target.get_child_count() == 0 and can_make_gift and Globals.gift_count < 10:
 		gift_spawner_component.spawn(target.global_position, target)
 		Globals.gift_count += 1
 		can_make_gift = false

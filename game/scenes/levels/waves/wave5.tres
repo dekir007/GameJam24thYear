@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_lngg6")
 global_time = 60.0
-thiefs = 5.0
+thiefs = 4.5
 bads = 3.5
 boss = 10.0
-mage = 30.0
+mage = 20.0

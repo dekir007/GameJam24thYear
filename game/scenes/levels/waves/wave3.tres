@@ -4,8 +4,8 @@
 
 [resource]
 script = ExtResource("1_juprd")
-global_time = 45.0
-thiefs = 4.0
+global_time = 60.0
+thiefs = 4.5
 bads = 8.0
 boss = 20.0
-mage = 30.0
+mage = 35.0

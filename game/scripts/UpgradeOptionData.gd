@@ -6,3 +6,4 @@ class_name UpgradeOptionData
 @export var description : String
 @export var price : int
 @export var level : int
+@export var max_level : int

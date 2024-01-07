@@ -12,14 +12,14 @@ signal upgrade
 
 func _ready() -> void:
 	icon_image.texture = data.icon
-	title.text = data.title + " " + str(data.level) + "/2"
+	title.text = data.title + (" " + str(data.level) + "/" + str(data.max_level) if data.max_level > 0 else "")
 	description.text = data.description + "\nPrice: " + str(data.price)
 
 
 func _on_button_button_up() -> void:
-	if data.level == 2 or Globals.money < data.price:
+	if data.level == data.max_level or Globals.money < data.price:
 		return
 	data.level += 1
 	Globals.money -= data.price
-	title.text = data.title + " " + str(data.level) + "/2"
+	title.text = data.title + (" " + str(data.level) + "/" + str(data.max_level) if data.max_level > 0 else "")
 	upgrade.emit()

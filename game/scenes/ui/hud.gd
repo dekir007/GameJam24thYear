@@ -4,14 +4,13 @@ signal upgrade_chosen_signal
 
 @onready var health_bar: TextureProgressBar = $HealthBar
 @onready var label: Label = $Label
-@onready var health_orb: Control = $HealthOrb
-@onready var health_orb_bar: TextureProgressBar = $HealthOrb/HealthOrbBar
 @onready var dash_progress_bar: TextureProgressBar = $DashProgressBar
 @onready var get_hit: TextureRect = $GetHit
 @onready var time_label: Label = $TimeLabel
 @onready var upgrades: HBoxContainer = %Upgrades
 @onready var upgrades_container: PanelContainer = $UpgradesContainer
 @onready var money_label: Label = %MoneyLabel
+@onready var health_label: Label = $HealthBar/HealthLabel
 
 const UPGRADE_OPTION = preload("res://scenes/ui/upgrade_option.tscn")
 
@@ -24,7 +23,6 @@ func _ready() -> void:
 	upgrades_container.hide()
 	#show_upgrades()
 	get_hit.show()
-	health_orb.hide()
 	get_hit.modulate.a = 0
 
 func _process(_delta: float) -> void:
