@@ -18,19 +18,22 @@ func _on_area_entered(area: Area3D) -> void:
 	if !attack_node.is_in_group("attack"):
 		return
 	# TODO
+	print(attack_node)
 	get_hit(attack_node.damage)
 	attack_node.delete()
 	#area.queue_free()
 
 func get_hit(damage : Damage):
+	print(self, "false")
 	set_deferred("monitoring", false)
 	#var d = (area.skill as Skill).attack(area.attacker, core)
 	
 	var d = snappedf(damage.damage * clamp(1 - defense.defense + damage.penetration, 0, 1), 0.01) # мда, тавтология вышла
 	hit.emit(HitContext.new(d))
 	
-	await get_tree().create_timer(0.1).timeout
+	await get_tree().create_timer(0.06).timeout
 	set_deferred("monitoring", true)
+	print(self, "true")
 
 class HitContext extends RefCounted:
 	#var attacker : CoreComponent

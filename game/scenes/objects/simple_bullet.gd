@@ -2,7 +2,7 @@ extends Node3D
 class_name SimpleBullet
 
 @export var direction:Vector3
-@export var speed:float = 5000
+@export var speed:float = 2000
 @export var damage : Damage
 
 @onready var gpu_particles_3d: GPUParticles3D = $GPUParticles3D
@@ -28,4 +28,6 @@ func delete():
 	get_tree().create_timer(gpu_particles_3d.lifetime).timeout.connect(queue_free)
 
 func _on_area_3d_body_entered(_body: Node3D) -> void:
-	delete()
+	print("world")
+	if speed != 0:
+		delete()

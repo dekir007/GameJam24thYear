@@ -70,16 +70,16 @@ func _physics_process(delta: float) -> void:
 		
 		var max_vel = Vector3(1,0,1) * 30
 		var vel = move_direction.normalized()*SPEED*delta
-		velocity = clamp((velocity.move_toward(vel, get_process_delta_time()*200)), -max_vel, max_vel)
+		velocity = clamp((velocity.move_toward(vel, 1.21)), -max_vel, max_vel)
 	
 	if Input.is_action_just_pressed("shift") and !shift_pressed:
 		shift_pressed = true
 		SPEED *= 1.5
-		print(SPEED)
+		#print(SPEED)
 	if Input.is_action_just_released("shift") and shift_pressed:
 		shift_pressed = false
 		SPEED /= 1.5
-		print(SPEED)
+		#print(SPEED)
 #endregion
 	
 	if Input.is_action_pressed("click"):
@@ -99,10 +99,10 @@ func dash():
 		#var tw = get_tree().create_tween()
 		#tw.tween_property(self, "SPEED", 500, .3).from(2500).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUART)
 		velocity *= 5
-		print(velocity)
+		#print(velocity)
 		var len = 40
 		velocity = velocity.clamp(Vector3(-1,0,-1)*len, Vector3(1,0,1)*len)
-		print(velocity, " ",velocity.length())
+		#print(velocity, " ",velocity.length())
 		dashing = true
 		can_dash = false
 		var tw = get_tree().create_tween()
@@ -156,6 +156,7 @@ func shoot():
 		return
 	can_shoot = false
 	spawner_component.spawn(marker_3d.global_position, self, damage)
+	print("shoot")
 	shoot_sound.play()
 	shoot_timer.start()
 
@@ -185,11 +186,11 @@ func upgrade_speed():
 func upgrade_damage():
 	damage.damage += 1
 	damage.penetration += .15
-	print("damage ", damage.damage)
+	#print("damage ", damage.damage)
 
 func upgrade_defense():
 	hit_box_component.defense.defense += 0.12
-	print("defense ", hit_box_component.defense.defense)
+	#print("defense ", hit_box_component.defense.defense)
 
 func upgrade_reload():
 	shoot_timer.wait_time -= 0.02
@@ -200,4 +201,4 @@ func upgrade_heal():
 func upgrade_max_health():
 	health_component.max_health += 15
 	health_component.heal(15)
-	print("max_health ", health_component.max_health)
+	#print("max_health ", health_component.max_health)

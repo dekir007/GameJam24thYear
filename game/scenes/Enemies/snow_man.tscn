@@ -16,7 +16,7 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uph77"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ym7gj"]
-radius = 0.617416
+radius = 0.789476
 height = 2.27718
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_j6mg2"]
