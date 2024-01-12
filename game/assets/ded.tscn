@@ -1222,7 +1222,7 @@ transform = Transform3D(1, 0, 0, 0, 0.405142, 0.914254, 0, -0.914254, 0.405142, 
 fov = 40.0
 
 [node name="Cursor" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.67324)
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, -8.67324)
 material_override = SubResource("StandardMaterial3D_3e7mg")
 mesh = SubResource("SphereMesh_4p45y")
 

@@ -51,7 +51,6 @@ skeleton = NodePath("")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0245496, 0.0065137, -0.0169465)
 shape = SubResource("ConvexPolygonShape3D_d70it")
-disabled = true
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0580965, 1.41887, -0.101426)

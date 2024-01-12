@@ -68,7 +68,6 @@ func _ready() -> void:
 	Globals.gift_count = get_tree().get_nodes_in_group("gift").size()
 
 func start_wave():
-	ded.health_component.heal(50)
 	battle_music.play()
 	
 	
@@ -143,28 +142,24 @@ func _on_bad_timer_timeout() -> void:
 func _on_wave_timer_timeout() -> void:
 	stop_wave()
 	if enemies.get_child_count() == 0:
-		battle_music.stop()
-		victoty_music.play()
-		await get_tree().create_timer(.5).timeout
-		var deer = DEER.instantiate()
-		deer.target = $DeerMarker3D2.global_position
-		deer.hud = ded.hud
-		deer_marker_3d.add_child(deer)
-		deer.appear()
+		show_deer()
 		#ded.hud.show_upgrades()
 
 
 func _on_enemies_child_exiting_tree(_node: Node) -> void:
 	if wave_timer.time_left == 0 and enemies.get_child_count() == 1:
 		# wave ended
-		battle_music.stop()
-		victoty_music.play()
-		await get_tree().create_timer(.5).timeout
-		var deer = DEER.instantiate()
-		deer.target = $DeerMarker3D2.global_position
-		deer.hud = ded.hud
-		deer_marker_3d.add_child(deer)
-		deer.appear()
-		#ded.hud.show_upgrades()
-		# play sani and olenie animation
-		# show upgrades
+		show_deer()
+
+## when no enemies
+func show_deer():
+	battle_music.stop()
+	victoty_music.play()
+	await get_tree().create_timer(.5).timeout
+	var deer = DEER.instantiate()
+	deer.target = $DeerMarker3D2.global_position
+	deer.hud = ded.hud
+	deer_marker_3d.add_child(deer)
+	deer.appear()
+	
+	ded.health_component.heal(50)

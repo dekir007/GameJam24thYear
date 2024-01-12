@@ -597,6 +597,7 @@ script = ExtResource("3_y5j5t")
 scene = ExtResource("4_l61ur")
 
 [node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="."]
+avoidance_enabled = false
 radius = 0.2
 
 [node name="GiftTimer" type="Timer" parent="."]

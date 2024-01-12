@@ -100,8 +100,8 @@ func dash():
 		#tw.tween_property(self, "SPEED", 500, .3).from(2500).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUART)
 		velocity *= 5
 		print(velocity)
-		var len = 40
-		velocity = velocity.clamp(Vector3(-1,0,-1)*len, Vector3(1,0,1)*len)
+		var length = 40
+		velocity = velocity.clamp(Vector3(-1,0,-1)*length, Vector3(1,0,1)*length)
 		print(velocity, " ",velocity.length())
 		dashing = true
 		can_dash = false
